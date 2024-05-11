@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./ComplaintBox.module.css";
 import {
   createWeb3Modal,
@@ -30,6 +30,70 @@ const ComplaintBox = () => {
   const { open } = useWeb3Modal();
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
+  const canvasRef = useRef(null);
+
+  const generateComplaintImage = async (complaint, userAddress) => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+  
+    // Load background image
+    const backgroundImage = new Image();
+    backgroundImage.src = "/card.png";
+    await new Promise((resolve) => {
+      backgroundImage.onload = resolve;
+    });
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+  
+    // Set font properties
+    const fontSize = 40;
+    const fontFamily = "Arial";
+    ctx.font = `${fontSize}px ${fontFamily}`;
+    ctx.fillStyle = "black";
+  
+    // Set padding and line height
+    const padding = 50;
+    const lineHeight = fontSize * 1.2;
+  
+    // Add complaint text with wrapping
+    const complaintLines = wrapText(ctx, `Complaint: ${complaint}`, padding, 0, canvas.width - padding * 2, lineHeight);
+    complaintLines.forEach((line, index) => {
+      ctx.fillText(line, padding, 300 + index * lineHeight);
+    });
+  
+    // Add user address
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "gray";
+    ctx.fillText(`User Address: ${userAddress}`, padding, 300 + complaintLines.length * lineHeight + 50);
+  
+    // Convert canvas to blob
+    const blob = await new Promise((resolve) => {
+      canvas.toBlob(resolve, "image/png");
+    });
+    return blob;
+  };
+  
+  // Helper function to wrap text
+  const wrapText = (ctx, text, x, y, maxWidth, lineHeight) => {
+    const words = text.split(" ");
+    let line = "";
+    const lines = [];
+  
+    for (let i = 0; i < words.length; i++) {
+      const testLine = line + words[i] + " ";
+      const metrics = ctx.measureText(testLine);
+      const testWidth = metrics.width;
+  
+      if (testWidth > maxWidth && i > 0) {
+        lines.push(line);
+        line = words[i] + " ";
+      } else {
+        line = testLine;
+      }
+    }
+    lines.push(line);
+  
+    return lines;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,14 +109,13 @@ const ComplaintBox = () => {
       const totalSupplyNumber = Number(totalSupply);
       const tokenId = (totalSupplyNumber + 1).toString();
 
-
       // Generate a random string for the file names
       const randomString = generateRandomString();
 
-      // Pin the image to IPFS
-      const imageFile = await fetch("/card.png").then((res) => res.blob());
+      // Generate the complaint image with the user's complaint and address
+      const imageBlob = await generateComplaintImage(complaint, address);
       const imageFileName = `card-${randomString}.png`;
-      const imageHash = await pinFileToIPFS(imageFile, imageFileName);
+      const imageHash = await pinFileToIPFS(imageBlob, imageFileName);
 
       // Create the metadata object with the correct IPFS gateway URL and token ID
       const metadata = {
@@ -147,6 +210,7 @@ const ComplaintBox = () => {
             required
           />
         </div>
+        <canvas ref={canvasRef} width="1414" height="2000" style={{ display: "none" }} />
         {isConnected ? (
           <button type="submit" className={styles.button}>
             Send Complaint
