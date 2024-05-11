@@ -10,7 +10,11 @@ import {
 import { BrowserProvider, Contract } from "ethers";
 import Swal from "sweetalert2";
 import { metadata, testnet, TokenAddress, TokenABI } from "../../Helper/helper";
-import { pinFileToIPFS, pinJSONToIPFS, generateRandomString } from "../../pinata";
+import {
+  pinFileToIPFS,
+  pinJSONToIPFS,
+  generateRandomString,
+} from "../../pinata";
 
 const ethersConfig = defaultConfig({ metadata });
 
@@ -36,6 +40,12 @@ const ComplaintBox = () => {
       const signer = await ethersProvider.getSigner();
       const TokenContract = new Contract(TokenAddress, TokenABI, signer);
 
+      // Get the current total supply of tokens
+      const totalSupply = await TokenContract.totalSupply();
+      const totalSupplyNumber = Number(totalSupply);
+      const tokenId = (totalSupplyNumber + 1).toString();
+
+
       // Generate a random string for the file names
       const randomString = generateRandomString();
 
@@ -44,9 +54,9 @@ const ComplaintBox = () => {
       const imageFileName = `card-${randomString}.png`;
       const imageHash = await pinFileToIPFS(imageFile, imageFileName);
 
-      // Create the metadata object with the correct IPFS gateway URL
+      // Create the metadata object with the correct IPFS gateway URL and token ID
       const metadata = {
-        name: "Complaint NFT",
+        name: `Complaint NFT #${tokenId}`,
         description: complaint,
         external_url: "https://pinata.cloud",
         image: `ipfs://${imageHash}`,
@@ -70,11 +80,11 @@ const ComplaintBox = () => {
       // Check if the transaction receipt has logs
       if (mintReceipt.logs && mintReceipt.logs.length > 0) {
         // Retrieve the token ID from the first log entry (Transfer event)
-        const tokenId = mintReceipt.logs[0].topics[3];
-        console.log("Token ID (hex):", tokenId);
+        const tokenIdHex = mintReceipt.logs[0].topics[3];
+        console.log("Token ID (hex):", tokenIdHex);
 
         // Convert the tokenId from hexadecimal to decimal
-        const tokenIdDecimal = parseInt(tokenId, 16);
+        const tokenIdDecimal = parseInt(tokenIdHex, 16);
         console.log("Token ID (decimal):", tokenIdDecimal);
 
         // Convert the tokenId to a string
@@ -142,7 +152,11 @@ const ComplaintBox = () => {
             Send Complaint
           </button>
         ) : (
-          <button type="button" onClick={() => open()} className={styles.button}>
+          <button
+            type="button"
+            onClick={() => open()}
+            className={styles.button}
+          >
             Connect Wallet
           </button>
         )}
