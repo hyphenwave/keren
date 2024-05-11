@@ -45,25 +45,29 @@ const ComplaintBox = () => {
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   
     // Set font properties
-    const fontSize = 40;
+    const fontSize = 38;
     const fontFamily = "Arial";
     ctx.font = `${fontSize}px ${fontFamily}`;
     ctx.fillStyle = "black";
+    ctx.textAlign = "center";
   
     // Set padding and line height
-    const padding = 50;
+    const padding = 180;
     const lineHeight = fontSize * 1.2;
   
-    // Add complaint text with wrapping
-    const complaintLines = wrapText(ctx, `Complaint: ${complaint}`, padding, 0, canvas.width - padding * 2, lineHeight);
+    // Add complaint text with wrapping and center alignment
+    const complaintLines = wrapText(ctx, ` ${complaint}`, padding, 0, canvas.width - padding * 2, lineHeight);
     complaintLines.forEach((line, index) => {
-      ctx.fillText(line, padding, 300 + index * lineHeight);
+      const lineWidth = ctx.measureText(line).width;
+      const centerX = canvas.width / 2;
+      ctx.fillText(line, centerX, 880 + index * lineHeight);
     });
   
     // Add user address
-    ctx.font = "30px Arial";
-    ctx.fillStyle = "gray";
-    ctx.fillText(`User Address: ${userAddress}`, padding, 300 + complaintLines.length * lineHeight + 50);
+    ctx.font = "26px Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "left";
+    ctx.fillText(`- ${userAddress}`, padding, 1200 + complaintLines.length * lineHeight + 50);
   
     // Convert canvas to blob
     const blob = await new Promise((resolve) => {
