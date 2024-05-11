@@ -1,0 +1,83 @@
+@font-face {
+  font-family: "tomhand";
+  src: url("/public/tomhand.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 4rem;
+  background-color: #fdfcf8;
+  text-align: center;
+}
+
+.heading {
+  font-size: 2rem;
+  font-family: "tomhand", sans-serif;
+  margin-bottom: 2rem;
+}
+
+.description {
+  font-size: 1.3rem;
+  font-family: "tomhand", sans-serif;
+  padding: 0 6rem;
+  margin-bottom: 1rem;
+}
+
+.form {
+  width: 15rem;
+  margin: 2rem auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.label {
+  font-size: 1rem;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+  text-align: left;
+  margin-bottom: .5rem;
+}
+
+ 
+  
+  .input,
+  .textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .textarea {
+    height: 100px;
+    resize: none;
+  }
+
+
+  
+  .button {
+  font-family: "Helvetica Neue", sans-serif;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #9026A6;
+    color: #fdfcf8;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border: 1px solid #9026A6;
+    transition: all .3s ease-in;
+
+  }
+  
+  .button:hover {
+    background-color: #fdfcf8;
+    color: #9026A6;  
+  }
