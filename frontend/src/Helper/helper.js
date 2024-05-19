@@ -729,7 +729,7 @@ export const testnet = {
   name: "Base Sepolia Testnet",
   currency: "ETH",
   explorerUrl: "https://sepolia.basescan.org",
-  rpcUrl: "https://base-sepolia-rpc.publicnode.com",
+  rpcUrl: "https://base-sepolia.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
 };
 
 export const metadata = {

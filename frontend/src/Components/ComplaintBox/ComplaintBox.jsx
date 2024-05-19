@@ -1,5 +1,8 @@
 import React, { useState, useRef } from "react";
 import styles from "./ComplaintBox.module.css";
+import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+import ConsentPopup from "../ConsentPopup/ConsentPopup";
+
 import {
   createWeb3Modal,
   defaultConfig,
@@ -27,6 +30,8 @@ createWeb3Modal({
 
 const ComplaintBox = () => {
   const [complaint, setComplaint] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [showConsentPopup, setShowConsentPopup] = useState(true);
   const { open } = useWeb3Modal();
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
@@ -58,16 +63,16 @@ const ComplaintBox = () => {
     // Add complaint text with wrapping and center alignment
     const complaintLines = wrapText(ctx, ` ${complaint}`, padding, 0, canvas.width - padding * 2, lineHeight);
     complaintLines.forEach((line, index) => {
-      const lineWidth = ctx.measureText(line).width;
       const centerX = canvas.width / 2;
       ctx.fillText(line, centerX, 880 + index * lineHeight);
     });
   
-    // Add user address
+    // Add user address at a fixed position
     ctx.font = "26px Arial";
     ctx.fillStyle = "black";
     ctx.textAlign = "left";
-    ctx.fillText(`- ${userAddress}`, padding, 1200 + complaintLines.length * lineHeight + 50);
+    const userAddressY = 1720; // Fixed y-coordinate for the user address
+    ctx.fillText(`- ${userAddress}`, padding, userAddressY);
   
     // Convert canvas to blob
     const blob = await new Promise((resolve) => {
@@ -99,11 +104,17 @@ const ComplaintBox = () => {
     return lines;
   };
 
+  const handleConsentAccept = () => {
+    setShowConsentPopup(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isConnected) throw Error("User disconnected");
 
     try {
+      setIsLoading(true);
+
       const ethersProvider = new BrowserProvider(walletProvider);
       const signer = await ethersProvider.getSigner();
       const TokenContract = new Contract(TokenAddress, TokenABI, signer);
@@ -187,11 +198,15 @@ const ComplaintBox = () => {
         text: "An error occurred while submitting the complaint. Please try again.",
         icon: "error",
       });
+    } finally {
+      setIsLoading(false); // Set loading state to false
     }
   };
 
   return (
     <div className={styles.container}>
+      {showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
+      {isLoading && <LoadingOverlay />}
       <h1 className={styles.heading}>Keren's Complaint Box</h1>
       <p className={styles.description}>
         Have a complaint to make? Darling, if you want something done right,
@@ -213,6 +228,36 @@ const ComplaintBox = () => {
             className={styles.textarea}
             required
           />
+        </div>
+        <div className={styles.relatedToSection}>
+          <p className={styles.relatedToText}>Related to:</p>
+          <div className={styles.checkboxGroup}>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkbox} />
+              <span className={styles.checkmark}></span>
+              Transaction Speed and Fees
+            </label>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkbox} />
+              <span className={styles.checkmark}></span>
+              Coinbase Wallet and dApp Usability
+            </label>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkbox} />
+              <span className={styles.checkmark}></span>
+              Security and Privacy
+            </label>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkbox} />
+              <span className={styles.checkmark}></span>
+              Support and Documentation
+            </label>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkbox} />
+              <span className={styles.checkmark}></span>
+              Community and Governance
+            </label>
+          </div>
         </div>
         <canvas ref={canvasRef} width="1414" height="2000" style={{ display: "none" }} />
         {isConnected ? (
