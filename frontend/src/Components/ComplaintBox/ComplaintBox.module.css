@@ -42,115 +42,137 @@
   font-family: "Helvetica Neue", sans-serif;
   font-weight: 100;
   text-align: left;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
- 
-  
-  .input,
-  .textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .textarea {
-    height: 100px;
-    resize: none;
-  }
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
+.textarea {
+  height: 100px;
+  resize: none;
+}
 
-  
-  .button {
+.button {
   font-family: "Helvetica Neue", sans-serif;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #9026A6;
-    color: #fdfcf8;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border: 1px solid #9026A6;
-    transition: all .3s ease-in;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #9026a6;
+  color: #fdfcf8;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border: 1px solid #9026a6;
+  transition: all 0.3s ease-in;
+}
 
+.button:hover {
+  background-color: #fdfcf8;
+  color: #9026a6;
+}
+
+.relatedToSection {
+  margin-bottom: 40px;
+}
+
+.relatedToText {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.checkboxGroup {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-wrap: nowrap;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.checkboxLabel:hover .checkbox ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkmark {
+  background-color: #a952b8;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxLabel .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+@media screen and (max-width: 1200px) {
+  .description {
+    padding: 0 3rem;
   }
-  
-  .button:hover {
-    background-color: #fdfcf8;
-    color: #9026A6;  
+}
+
+@media screen and (max-width: 1000px) {
+  .heading {
+    font-size: 1.7rem;
   }
 
-  .relatedToSection {
-    margin-bottom: 40px;
+  .description {
+    font-size: 1rem;
   }
-  
-  .relatedToText {
-    font-weight: bold;
-    margin-bottom: 10px;
-    font-family: "Helvetica Neue", sans-serif;
+
+  .container {
+    padding: 2rem 0;
   }
-  
-  .checkboxGroup {
-    font-family: "Helvetica Neue", sans-serif;
-  }
-  
+}
+
+@media screen and (max-width: 500px) {
   .checkboxLabel {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    text-wrap: nowrap;
-    position: relative;
-    padding-left: 35px;
-    cursor: pointer;
-    font-size: 16px;
-    user-select: none;
+    font-size: 12px;
+    margin-bottom: 18px;
   }
-  
-  .checkbox {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 4px;
-    margin-right: 5px;
-  }
-  
-  .checkboxLabel:hover .checkbox ~ .checkmark {
-    background-color: #ccc;
-  }
-  
-  .checkboxLabel .checkbox:checked ~ .checkmark {
-    background-color: #A952B8;
-  }
-  
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  .checkboxLabel .checkbox:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  .checkboxLabel .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-  }
+}
