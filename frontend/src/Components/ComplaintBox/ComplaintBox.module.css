@@ -81,3 +81,34 @@
     background-color: #fdfcf8;
     color: #9026A6;  
   }
+
+  .relatedToSection {
+    margin-bottom: 20px;
+  }
+  
+  .relatedToText {
+    font-weight: bold;
+    margin-bottom: 10px;
+  font-family: "Helvetica Neue", sans-serif;
+
+  }
+  
+  .checkboxGroup {
+  font-family: "Helvetica Neue", sans-serif;
+
+  }
+  
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px; 
+    text-wrap: nowrap;
+  }
+  
+  .checkbox {
+    margin-right: 5px;
+  }
+
+  input[type="checkbox"]:checked:before {
+    background-color: lightred;
+}
