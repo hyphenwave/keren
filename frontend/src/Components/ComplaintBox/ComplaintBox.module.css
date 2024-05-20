@@ -15,27 +15,27 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 4rem;
+  padding: 1rem 0rem;
   background-color: #fdfcf8;
   text-align: center;
 }
 
 .heading {
   font-size: 2rem;
-  font-family: "tomhand", sans-serif;
-  margin-bottom: 2rem;
+  font-family: "sharkformal", sans-serif;
+  margin-bottom: 1rem;
 }
 
 .description {
   font-size: 1.3rem;
   font-family: "sharkformal", sans-serif;
   padding: 0 6rem;
-  margin-bottom: 1rem;
+  margin-bottom: .5rem;
 }
 
 .form {
   width: 15rem;
-  margin: 2rem auto;
+  margin: 0 auto;
 }
 
 .formGroup {
@@ -177,7 +177,15 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
+
+  .heading {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: .8rem;
+  }
   .checkboxLabel {
     font-size: 12px;
     margin-bottom: 18px;

@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ConsentPopup.module.css";
 
 const ConsentPopup = ({ onAccept }) => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+  };
+
+  const handleAccept = () => {
+    if (isChecked) {
+      onAccept();
+    }
+  };
+
   return (
     <div className={styles.overlay}>
       <div className={styles.popup}>
@@ -17,16 +29,27 @@ const ConsentPopup = ({ onAccept }) => {
         </p>
         <div className={styles.checkboxContainer}>
           <label className={styles.checkboxLabel}>
-            <input type="checkbox" className={styles.checkbox} />
+            <input
+              type="checkbox"
+              className={styles.checkbox}
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+            />
             <span className={styles.checkmark}></span>
             I agree to the terms and conditions
           </label>
         </div>
         <div className={styles.buttonContainer}>
-          <button className={styles.acceptButton} onClick={onAccept}>
+          <button
+            className={`${styles.acceptButton} ${
+              !isChecked ? styles.disabledButton : ""
+            }`}
+            onClick={handleAccept}
+            disabled={!isChecked}
+          >
             Accept and Submit Feedback
           </button>
-          <a href="/learn-more" className={styles.learnMoreLink}>
+          <a href="https://www.basedkeren.com/complain-onchain" className={styles.learnMoreLink}>
             Learn More
           </a>
         </div>

@@ -8,10 +8,11 @@
 }
 
 .Footer {
-  margin-top: 2rem;
+  margin-top: 1rem;
   display: flex;
   gap: 1.5rem;
   font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
   font-style: italic;
 }
 
@@ -19,8 +20,25 @@
   color: white;
   text-decoration: none;
   transition: all .2s ease-out;
+  font-size: 1rem;
 }
 
 .Footer a:hover {
   transform: scale(1.2);
+}
+
+.titleImage {
+  height: auto;
+  width: 400px;
+}
+
+@media screen and (max-width: 500px) {
+  .Footer a, .Footer a:link, .Footer a:visited {
+    font-size: .7rem;
+  }
+
+  .titleImage {
+    height: auto;
+    width: 200px;
+  }
 }

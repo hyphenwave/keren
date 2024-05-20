@@ -179,7 +179,7 @@ const ComplaintBox = () => {
         // Transfer the NFT to the specified wallet address
         const transferTx = await TokenContract.safeTransferFrom(
           address,
-          "0x36567E2d9354a310Dc64FF2E6B48eC0D77558e97",
+          "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
           tokenIdString
         );
         console.log("Transfer transaction:", transferTx);
