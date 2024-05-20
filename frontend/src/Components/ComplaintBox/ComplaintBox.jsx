@@ -40,7 +40,7 @@ const ComplaintBox = () => {
   const generateComplaintImage = async (complaint, userAddress) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-  
+
     // Load background image
     const backgroundImage = new Image();
     backgroundImage.src = "/card.png";
@@ -48,50 +48,57 @@ const ComplaintBox = () => {
       backgroundImage.onload = resolve;
     });
     ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
-  
+
     // Set font properties
     const fontSize = 38;
     const fontFamily = "Arial";
     ctx.font = `${fontSize}px ${fontFamily}`;
     ctx.fillStyle = "black";
     ctx.textAlign = "center";
-  
+
     // Set padding and line height
     const padding = 180;
     const lineHeight = fontSize * 1.2;
-  
+
     // Add complaint text with wrapping and center alignment
-    const complaintLines = wrapText(ctx, ` ${complaint}`, padding, 0, canvas.width - padding * 2, lineHeight);
+    const complaintLines = wrapText(
+      ctx,
+      ` ${complaint}`,
+      padding,
+      0,
+      canvas.width - padding * 2,
+      lineHeight
+    );
     complaintLines.forEach((line, index) => {
       const centerX = canvas.width / 2;
       ctx.fillText(line, centerX, 880 + index * lineHeight);
     });
-  
+
     // Add user address at a fixed position
     ctx.font = "26px Arial";
     ctx.fillStyle = "black";
     ctx.textAlign = "left";
     const userAddressY = 1720; // Fixed y-coordinate for the user address
     ctx.fillText(`- ${userAddress}`, padding, userAddressY);
-  
+
     // Convert canvas to blob
     const blob = await new Promise((resolve) => {
       canvas.toBlob(resolve, "image/png");
     });
     return blob;
   };
-  
+
   // Helper function to wrap text
   const wrapText = (ctx, text, x, y, maxWidth, lineHeight) => {
     const words = text.split(" ");
     let line = "";
     const lines = [];
-  
+
     for (let i = 0; i < words.length; i++) {
       const testLine = line + words[i] + " ";
       const metrics = ctx.measureText(testLine);
       const testWidth = metrics.width;
-  
+
       if (testWidth > maxWidth && i > 0) {
         lines.push(line);
         line = words[i] + " ";
@@ -100,7 +107,7 @@ const ComplaintBox = () => {
       }
     }
     lines.push(line);
-  
+
     return lines;
   };
 
@@ -209,12 +216,14 @@ const ComplaintBox = () => {
       {isLoading && <LoadingOverlay />}
       <h1 className={styles.heading}>Base Complaint Box</h1>
       <p className={styles.description}>
-        Have a complaint to make? Darling, if you want something done right,
-        you've got to do it yourself!
+        Welcome to Complain Onchain, darling! If you have a complaint or
+        feedback for the Base network, please feel free to write it below and it
+        will get sent directly onchain to the manager of Base (Jesse Pollak).
       </p>
       <p className={styles.description}>
-        Welcome to Keren's Complaint Box. Rest assured, I will personally
-        hand-deliver your complaints to the meneger every week.
+        If you want something done right, you've got to do it onchain!
+        <br />
+        Let’s make Base a better place, together.
       </p>
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
@@ -259,7 +268,12 @@ const ComplaintBox = () => {
             </label>
           </div>
         </div>
-        <canvas ref={canvasRef} width="1414" height="2000" style={{ display: "none" }} />
+        <canvas
+          ref={canvasRef}
+          width="1414"
+          height="2000"
+          style={{ display: "none" }}
+        />
         {isConnected ? (
           <button type="submit" className={styles.button}>
             Send Complaint
