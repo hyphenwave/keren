@@ -207,7 +207,7 @@ const ComplaintBox = () => {
     <div className={styles.container}>
       {showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
       {isLoading && <LoadingOverlay />}
-      <h1 className={styles.heading}>Keren's Complaint Box</h1>
+      <h1 className={styles.heading}>Base Complaint Box</h1>
       <p className={styles.description}>
         Have a complaint to make? Darling, if you want something done right,
         you've got to do it yourself!

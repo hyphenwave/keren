@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "sharkformal";
+  src: url("/public/sharkformalfunnyness.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -21,7 +28,7 @@
 
 .description {
   font-size: 1.3rem;
-  font-family: "tomhand", sans-serif;
+  font-family: "sharkformal", sans-serif;
   padding: 0 6rem;
   margin-bottom: 1rem;
 }
