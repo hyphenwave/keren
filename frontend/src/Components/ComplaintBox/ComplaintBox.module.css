@@ -157,6 +157,15 @@
   transform: rotate(45deg);
 }
 
+.characterCounter {
+  margin-top: 5px;
+  margin-left: auto;
+  font-size: 10px;
+  color: #888;
+  font-family: "Helvetica Neue", sans-serif;
+
+}
+
 @media screen and (max-width: 1200px) {
   .description {
     padding: 0 3rem;

@@ -7,6 +7,10 @@
   flex-direction: column;
 }
 
+.swal2-container {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
 .Footer {
   margin-top: 1rem;
   display: flex;

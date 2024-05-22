@@ -119,6 +119,15 @@ const ComplaintBox = () => {
     e.preventDefault();
     if (!isConnected) throw Error("User disconnected");
 
+    if (complaint.length > 500) {
+      Swal.fire({
+        title: "Character Limit Exceeded",
+        text: "Please limit your complaint to 500 characters.",
+        icon: "warning",
+      });
+      return;
+    }
+
     try {
       setIsLoading(true);
 
@@ -143,7 +152,7 @@ const ComplaintBox = () => {
       const metadata = {
         name: `Complaint NFT #${tokenId}`,
         description: complaint,
-        external_url: "https://pinata.cloud",
+        external_url: "https://www.basedkeren.com/",
         image: `ipfs://${imageHash}`,
       };
 
@@ -156,33 +165,28 @@ const ComplaintBox = () => {
         address,
         `ipfs://${metadataHash}`
       );
-      console.log("Mint transaction:", mintTx);
       const mintReceipt = await mintTx.wait();
 
       // Log the mint transaction receipt to check for emitted events
-      console.log("Mint transaction receipt:", mintReceipt);
 
       // Check if the transaction receipt has logs
       if (mintReceipt.logs && mintReceipt.logs.length > 0) {
         // Retrieve the token ID from the first log entry (Transfer event)
         const tokenIdHex = mintReceipt.logs[0].topics[3];
-        console.log("Token ID (hex):", tokenIdHex);
 
         // Convert the tokenId from hexadecimal to decimal
         const tokenIdDecimal = parseInt(tokenIdHex, 16);
-        console.log("Token ID (decimal):", tokenIdDecimal);
 
         // Convert the tokenId to a string
         const tokenIdString = tokenIdDecimal.toString();
-        console.log("Token ID (string):", tokenIdString);
 
         // Transfer the NFT to the specified wallet address
         const transferTx = await TokenContract.safeTransferFrom(
           address,
-          "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
+          "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1", 
+          // "0x36567E2d9354a310Dc64FF2E6B48eC0D77558e97", - depo wallet
           tokenIdString
         );
-        console.log("Transfer transaction:", transferTx);
         await transferTx.wait();
 
         Swal.fire({
@@ -233,10 +237,13 @@ const ComplaintBox = () => {
           <textarea
             id="complaint"
             value={complaint}
-            onChange={(e) => setComplaint(e.target.value)}
+            onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
             className={styles.textarea}
             required
           />
+          <div className={styles.characterCounter}>
+            {complaint.length}/500 characters
+          </div>
         </div>
         <div className={styles.relatedToSection}>
           <p className={styles.relatedToText}>Related to:</p>

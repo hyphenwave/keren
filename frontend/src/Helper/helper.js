@@ -1,4 +1,4 @@
-export const TokenAddress = "0xcA4eea66c3595fAA923e9ec21b738b38c5c62Ea4";
+export const TokenAddress = "0xf9bd1DCaFE10b66fFc4DCb7D4c003DAeb869B044";
 
 export const TokenABI = [
 	{
@@ -725,19 +725,23 @@ export const TokenABI = [
 ];
 
 export const testnet = {
-  chainId: 84532,
-  name: "Base Sepolia Testnet",
-  currency: "ETH",
-  explorerUrl: "https://sepolia.basescan.org",
-  rpcUrl: "https://base-sepolia.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
-};
-
-export const metadata = {
-  name: "My Website",
-  description: "My Website description",
-  url: "https://mywebsite.com",
-  icons: ["https://avatars.mywebsite.com/"],
-};
+	chainId: 8453,
+	name: "Base Mainnet",
+	currency: "ETH",
+	explorerUrl: "https://basescan.org/",
+	rpcUrl:
+	  "https://base-mainnet.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
+  };
+  
+  export const metadata = {
+	name: "Complain On Chain",
+	description:
+	  "Welcome to Complain Onchain, darling! If you have a complaint or feedback for the Base network, please feel free to write it below and it will get sent directly onchain to the manager of Base (Jesse Pollak).",
+	url: "https://www.basedkeren.com/",
+	icons: [
+	  "https://static.wixstatic.com/media/ce299c_d45967b43db341cbb5ec1e77e21a4784~mv2.png/v1/fill/w_1080,h_1080,al_c,q_90,enc_auto/karen%20half%20body.png",
+	],
+  };
 
 // export const testnet = {
 //   chainId: 11155111,
