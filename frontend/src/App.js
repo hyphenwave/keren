@@ -9,7 +9,7 @@ function App() {
       <ComplaintBox></ComplaintBox>
 
       <div className="Footer">
-        <a href="https://www.basedkeren.com/">Keren Website</a>
+        <a href="https://www.basedkeren.com/" className="webLink">Keren Website</a>
         <a href="https://t.me/kerenbase">Telegram</a>
         <a href="https://dexscreener.com/base/0x1ca25a133160beb02b18c1983c997fafbe98bc6e">Chart</a>
         <a href="https://warpcast.com/basedkeren">Warpcast</a>
