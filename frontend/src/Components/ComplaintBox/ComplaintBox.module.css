@@ -18,6 +18,7 @@
   padding: 1rem 0rem;
   background-color: #fdfcf8;
   text-align: center;
+  position: relative;
 }
 
 .heading {
@@ -166,6 +167,14 @@
 
 }
 
+.kerenImage {
+  position: absolute;
+  top: -110px;
+  left: 80px;
+  width: 100px;
+  height: auto;
+}
+
 @media screen and (max-width: 1200px) {
   .description {
     padding: 0 3rem;
@@ -198,5 +207,12 @@
   .checkboxLabel {
     font-size: 12px;
     margin-bottom: 18px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+
+  .kerenImage {
+    display: none;
   }
 }

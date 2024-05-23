@@ -26,6 +26,9 @@ createWeb3Modal({
   chains: [testnet],
   projectId: process.env.REACT_APP_PROJECT_ID,
   enableAnalytics: true,
+  featuredWalletIds: [
+    'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa',
+  ],
 });
 
 const ComplaintBox = () => {
@@ -216,6 +219,8 @@ const ComplaintBox = () => {
 
   return (
     <div className={styles.container}>
+      <img src="/keren_sit.png" alt="Keren sitting" className={styles.kerenImage} />
+      
       {showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
       {isLoading && <LoadingOverlay />}
       <h1 className={styles.heading}>Base Complaint Box</h1>
