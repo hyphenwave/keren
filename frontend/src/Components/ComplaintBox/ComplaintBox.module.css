@@ -219,6 +219,15 @@
   animation: slideIn 1.5s ease-in;
 
   }
+
+  .label {
+    font-size: .75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1rem;
+  }
 }
 
 @keyframes slideIn {
