@@ -213,6 +213,20 @@
 @media screen and (max-width: 400px) {
 
   .kerenImage {
-    display: none;
+    top: 210px;
+    left: -60px;
+    transform: rotate(60deg);
+  animation: slideIn 1.5s ease-in;
+
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    left: -100px;
+
+  }
+  100% {
+    left: -60px;
   }
 }
