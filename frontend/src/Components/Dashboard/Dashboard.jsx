@@ -16,7 +16,7 @@ const Dashboard = () => {
       try {
         const address = "0xf9bd1DCaFE10b66fFc4DCb7D4c003DAeb869B044";
         const withMetadata = "true";
-        const apiKey = "vB9GAUMtc620oLOkqZiZ1Dks3ezfijRl";
+        const apiKey = process.env.REACT_APP_ALCHEMY_API_KEY;
         const baseURL = `https://base-mainnet.g.alchemy.com/nft/v2/${apiKey}/getNFTsForCollection`;
 
         let allNfts = [];
