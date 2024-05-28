@@ -31,7 +31,7 @@
   font-size: 1.3rem;
   font-family: "sharkformal", sans-serif;
   padding: 0 6rem;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .form {
@@ -164,7 +164,6 @@
   font-size: 10px;
   color: #888;
   font-family: "Helvetica Neue", sans-serif;
-
 }
 
 .kerenImage {
@@ -196,32 +195,29 @@
 }
 
 @media screen and (max-width: 600px) {
-
   .heading {
     font-size: 1.2rem;
   }
 
   .description {
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
   .checkboxLabel {
     font-size: 12px;
     margin-bottom: 18px;
   }
-}
-
-@media screen and (max-width: 400px) {
 
   .kerenImage {
     top: 210px;
     left: -60px;
     transform: rotate(60deg);
-  animation: slideIn 1.5s ease-in;
-
+    animation: slideIn 1.5s ease-in;
   }
+}
 
+@media screen and (max-width: 400px) {
   .label {
-    font-size: .75rem;
+    font-size: 0.75rem;
     margin-bottom: 0.25rem;
   }
 
@@ -233,7 +229,6 @@
 @keyframes slideIn {
   0% {
     left: -100px;
-
   }
   100% {
     left: -60px;

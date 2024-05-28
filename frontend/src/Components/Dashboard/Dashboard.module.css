@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "sharkformal";
+  src: url("/public/sharkformalfunnyness.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dashboard {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  font-family: "sharkformal", sans-serif;
+}
+
+th,
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #fff;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  text-align: left;
+  word-wrap: break-word;
+  max-width: 400px;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+th {
+  background-color: #fff;
+}
+
+button {
+  background: none;
+  border: none;
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.pageItem {
+  margin: 0.5rem;
+}
+
+.pageLink {
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 0.5rem;
+}
+
+.loading {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.header {
+  font-family: "sharkformal", sans-serif;
+  margin-bottom: 1rem;
+  margin-top: 4rem;
+  text-align: center;
+  color: #fff;
+}
+
+.activePageLink {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.backLink {
+  font-family: "Helvetica Neue", sans-serif;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+  td {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .pagination {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+    gap: 0.5rem;
+    justify-items: center;
+  }
+
+  .pageItem {
+    margin: 0;
+  }
+
+  .pageLink {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .dashboard {
+    max-width: 100%;
+  }
+
+  td {
+    font-size: 0.75rem;
+  }
+
+  .header {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .dashboard {
+    padding: 0;
+  }
+
+  .backLink {
+    font-size: .65rem;
+  }
+
+  .header {
+    padding: 0 1rem;
+  }
+}

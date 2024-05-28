@@ -278,6 +278,11 @@ const ComplaintBox = () => {
               <span className={styles.checkmark}></span>
               Community and Governance
             </label>
+            <label className={styles.checkboxLabel}>
+              <input type="checkbox" className={styles.checkbox} />
+              <span className={styles.checkmark}></span>
+              Others
+            </label>
           </div>
         </div>
         <canvas

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
   flex-direction: column;
 }
@@ -15,9 +15,10 @@
   margin-top: 1rem;
   display: flex;
   gap: 1.5rem;
-  font-family: "Helvetica Neue", sans-serif;
+  font-family: "sharkformal", sans-serif;
   font-weight: 100;
   font-style: italic;
+  margin-bottom: 1rem;
 }
 
 .webLink {
@@ -25,10 +26,12 @@
   animation: pulsate 1.5s infinite;
 }
 
-.Footer a, .Footer a:link, .Footer a:visited {
+.Footer a,
+.Footer a:link,
+.Footer a:visited {
   color: white;
   text-decoration: none;
-  transition: all .2s ease-out;
+  transition: all 0.2s ease-out;
   font-size: 1rem;
 }
 
@@ -39,6 +42,7 @@
 .titleImage {
   height: auto;
   width: 400px;
+  margin-top: 4rem;
 }
 
 @keyframes pulsate {
@@ -57,12 +61,20 @@
 }
 
 @media screen and (max-width: 500px) {
-  .Footer a, .Footer a:link, .Footer a:visited {
-    font-size: .7rem;
+  .Footer a,
+  .Footer a:link,
+  .Footer a:visited {
+    font-size: 0.7rem;
   }
 
   .titleImage {
     height: auto;
     width: 200px;
+    margin-top: 1rem;
+  }
+
+  .Footer {
+    gap: 0.75rem;
+    margin-bottom: 2rem;
   }
 }
