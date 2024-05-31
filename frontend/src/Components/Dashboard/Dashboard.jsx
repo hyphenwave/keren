@@ -10,6 +10,7 @@ const Dashboard = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [nftsPerPage] = useState(10);
   const [isLoading, setIsLoading] = useState(true);
+  const [sortOrder, setSortOrder] = useState("latest");
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -52,7 +53,15 @@ const Dashboard = () => {
 
   const indexOfLastNft = currentPage * nftsPerPage;
   const indexOfFirstNft = indexOfLastNft - nftsPerPage;
-  const currentNfts = nfts.slice(indexOfFirstNft, indexOfLastNft);
+  const currentNfts = nfts
+    .sort((a, b) => {
+      if (sortOrder === "latest") {
+        return b.id.tokenId - a.id.tokenId;
+      } else {
+        return a.id.tokenId - b.id.tokenId;
+      }
+    })
+    .slice(indexOfFirstNft, indexOfLastNft);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -63,13 +72,23 @@ const Dashboard = () => {
     return ipfsLink;
   };
 
+  const handleSortChange = () => {
+    setSortOrder((prevOrder) => (prevOrder === "latest" ? "oldest" : "latest"));
+    setCurrentPage(1);
+  };
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.header}>
         <h1>NFT Dashboard</h1>
-        <Link to="/" className={styles.backLink}>
-          Back to Complain OnChain
-        </Link>
+        <div className={styles.headerActions}>
+          <button className={styles.sortButton} onClick={handleSortChange}>
+            Sort by: {sortOrder === "latest" ? "Latest" : "Oldest"}
+          </button>
+          <Link to="/" className={styles.backLink}>
+            Back to Complain OnChain
+          </Link>
+        </div>
       </div>
       {isLoading ? (
         <LoadingOverlay />
