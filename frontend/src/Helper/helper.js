@@ -1,4 +1,4 @@
-export const TokenAddress = "0xf9bd1DCaFE10b66fFc4DCb7D4c003DAeb869B044";
+export const TokenAddress = "0xca4eea66c3595faa923e9ec21b738b38c5c62ea4";
 
 export const TokenABI = [
 	{
@@ -725,12 +725,12 @@ export const TokenABI = [
 ];
 
 export const testnet = {
-	chainId: 8453,
-	name: "Base Mainnet",
+	chainId: 84532,
+	name: "Base Sepolia Testnet",
 	currency: "ETH",
-	explorerUrl: "https://basescan.org/",
+	explorerUrl: "https://sepolia.basescan.org",
 	rpcUrl:
-	  "https://base-mainnet.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
+	  "https://base-sepolia.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
   };
   
   export const metadata = {
