@@ -186,8 +186,8 @@ const ComplaintBox = () => {
         // Transfer the NFT to the specified wallet address
         const transferTx = await TokenContract.safeTransferFrom(
           address,
-          "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1", 
-          // "0x36567E2d9354a310Dc64FF2E6B48eC0D77558e97", - depo wallet
+          "0x5FfAb3A42f8dDD7f292312C59599674e5487EC30", 
+          // "0x5FfAb3A42f8dDD7f292312C59599674e5487EC30", - depo wallet
           tokenIdString
         );
         await transferTx.wait();
