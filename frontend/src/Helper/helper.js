@@ -730,7 +730,7 @@ export const testnet = {
 	currency: "ETH",
 	explorerUrl: "https://basescan.org/",
 	rpcUrl:
-	  "https://base-mainnet.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
+	"https://base-mainnet.blastapi.io/d3c0b54d-a84f-466e-807b-99b85be3d549",
   };
   
   export const metadata = {
