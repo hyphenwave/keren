@@ -31,7 +31,7 @@ createWeb3Modal({
   ],
 });
 
-const ComplaintBox = () => {
+const ComplaintBox = ({ recipient }) => {
   const [complaint, setComplaint] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showConsentPopup, setShowConsentPopup] = useState(true);
@@ -40,13 +40,52 @@ const ComplaintBox = () => {
   const { walletProvider } = useWeb3ModalProvider();
   const canvasRef = useRef(null);
 
+  const recipientInfo = {
+    Jesse: {
+      address: "0x5FfAb3A42f8dDD7f292312C59599674e5487EC30",
+      backgroundImage: "/card.png",
+      textColor: "black",
+      description: (
+        <>
+          <p className={styles.description}>
+            Welcome to Complain Onchain, darling! If you have a complaint or
+            feedback for the Base network, please feel free to write it below and it
+            will get sent directly onchain to the manager of Base (Jesse Pollak).
+          </p>
+          <p className={styles.description}>
+            If you want something done right, you've got to do it onchain!
+            <br />
+            Let's make Base a better place, together.
+          </p>
+        </>
+      ),
+    },
+    Brian: {
+      address: "0x4be22c6fe18fa29C608cd8eE1cDcfE4c2936b94C",
+      backgroundImage: "/card_brian.png",
+      textColor: "white",
+      description: (
+        <>
+          <p className={styles.description}>
+            Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain to the manager of Coinbase (Brian Armstrong).
+          </p>
+          <p className={styles.description}>
+            If you want something done right, you've got to do it onchain! Let's make Coinbase a better place, together.
+            <br />
+            Let's make Base a better place, together.
+          </p>
+        </>
+      ),
+    },
+  };
+
   const generateComplaintImage = async (complaint, userAddress) => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
 
     // Load background image
     const backgroundImage = new Image();
-    backgroundImage.src = "/card.png";
+    backgroundImage.src = recipientInfo[recipient].backgroundImage;
     await new Promise((resolve) => {
       backgroundImage.onload = resolve;
     });
@@ -56,7 +95,7 @@ const ComplaintBox = () => {
     const fontSize = 38;
     const fontFamily = "Arial";
     ctx.font = `${fontSize}px ${fontFamily}`;
-    ctx.fillStyle = "black";
+    ctx.fillStyle = recipientInfo[recipient].textColor;
     ctx.textAlign = "center";
 
     // Set padding and line height
@@ -79,7 +118,7 @@ const ComplaintBox = () => {
 
     // Add user address at a fixed position
     ctx.font = "26px Arial";
-    ctx.fillStyle = "black";
+    ctx.fillStyle = recipientInfo[recipient].textColor;
     ctx.textAlign = "left";
     const userAddressY = 1720; // Fixed y-coordinate for the user address
     ctx.fillText(`- ${userAddress}`, padding, userAddressY);
@@ -186,8 +225,7 @@ const ComplaintBox = () => {
         // Transfer the NFT to the specified wallet address
         const transferTx = await TokenContract.safeTransferFrom(
           address,
-          "0x5FfAb3A42f8dDD7f292312C59599674e5487EC30", 
-          // "0x5FfAb3A42f8dDD7f292312C59599674e5487EC30", - depo wallet
+          recipientInfo[recipient].address,
           tokenIdString
         );
         await transferTx.wait();
@@ -223,17 +261,8 @@ const ComplaintBox = () => {
       
       {showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
       {isLoading && <LoadingOverlay />}
-      <h1 className={styles.heading}>Base Complaint Box</h1>
-      <p className={styles.description}>
-        Welcome to Complain Onchain, darling! If you have a complaint or
-        feedback for the Base network, please feel free to write it below and it
-        will get sent directly onchain to the manager of Base (Jesse Pollak).
-      </p>
-      <p className={styles.description}>
-        If you want something done right, you've got to do it onchain!
-        <br />
-        Let’s make Base a better place, together.
-      </p>
+      <h1 className={styles.heading}>Base Complaint Box - Complain to {recipient}</h1>
+      {recipientInfo[recipient].description}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
           <label htmlFor="complaint" className={styles.label}>

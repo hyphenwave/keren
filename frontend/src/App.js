@@ -1,31 +1,50 @@
 import React from "react";
-import { BrowserRouter,Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ComplaintBox from "./Components/ComplaintBox/ComplaintBox";
 import Dashboard from "./Components/Dashboard/Dashboard";
+import Homepage from "./Components/Homepage/Homepage";
 
 function App() {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div className="App">
-            <img className="titleImage" src="title.png" alt="Title"></img>
-            <ComplaintBox></ComplaintBox>
-            <Footer />
-          </div>
-        }
-      />
-      <Route path="/dashboard" element={
-        <div className="App">
-        {/* <img className="titleImage" src="title.png" alt="Title"></img> */}
-        <Dashboard></Dashboard>
-        <Footer />
-      </div>
-      } />
-    </Routes>
+      <Routes>
+        <Route
+          path="/"
+          element={
+              <Homepage></Homepage>
+          }
+        />
+        <Route
+          path="/jesse"
+          element={
+            <div className="App">
+              <img className="titleImage" src="title.png" alt="Title" />
+              <ComplaintBox recipient="Jesse" />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/brian"
+          element={
+            <div className="App">
+              <img className="titleImage" src="title.png" alt="Title" />
+              <ComplaintBox recipient="Brian" />
+              <Footer />
+            </div>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <div className="App">
+              <Dashboard />
+              <Footer />
+            </div>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
@@ -49,4 +68,4 @@ const Footer = () => {
   );
 };
 
-export default App; 
+export default App;
