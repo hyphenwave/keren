@@ -6,8 +6,8 @@ const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   const complaintBoxes = [
-    { name: "Jesse", link: "/jesse" },
-    { name: "Brian", link: "/brian" },
+    { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
+    { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
   ];
 
   const filteredBoxes = complaintBoxes.filter((box) =>
@@ -28,7 +28,9 @@ const Homepage = () => {
         {filteredBoxes.length > 0 ? (
           filteredBoxes.map((box) => (
             <Link key={box.name} to={box.link} className={styles.box}>
-              Complain To {box.name}
+              <div>Complain To {box.name}</div>
+              <br></br>
+              <div>{box.title}</div>
             </Link>
           ))
         ) : (
