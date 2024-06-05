@@ -42,7 +42,7 @@ const ComplaintBox = ({ recipient }) => {
 
   const recipientInfo = {
     Jesse: {
-      address: "0x5FfAb3A42f8dDD7f292312C59599674e5487EC30",
+      address: "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
       backgroundImage: "/card.png",
       textColor: "black",
       description: (
@@ -61,7 +61,7 @@ const ComplaintBox = ({ recipient }) => {
       ),
     },
     Brian: {
-      address: "0x4be22c6fe18fa29C608cd8eE1cDcfE4c2936b94C",
+      address: "0x5b76f5B8fc9D700624F78208132f91AD4e61a1f0",
       backgroundImage: "/card_brian.png",
       textColor: "white",
       description: (
