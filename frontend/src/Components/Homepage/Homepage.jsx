@@ -8,6 +8,7 @@ const Homepage = () => {
   const complaintBoxes = [
     { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
     { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
+    { name: "Based Merch", link: "/basedmerch", title: "Store" },
   ];
 
   const filteredBoxes = complaintBoxes.filter((box) =>
@@ -38,8 +39,7 @@ const Homepage = () => {
         )}
       </div>
 
-        <Footer />
-
+      <Footer />
     </div>
   );
 };

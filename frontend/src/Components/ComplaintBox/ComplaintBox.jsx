@@ -27,7 +27,7 @@ createWeb3Modal({
   projectId: process.env.REACT_APP_PROJECT_ID,
   enableAnalytics: true,
   featuredWalletIds: [
-    'fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa',
+    "fd20dc426fb37566d803205b19bbc1d4096b248ac04548e3cfb6b3a38bd033aa",
   ],
 });
 
@@ -49,8 +49,9 @@ const ComplaintBox = ({ recipient }) => {
         <>
           <p className={styles.description}>
             Welcome to Complain Onchain, darling! If you have a complaint or
-            feedback for the Base network, please feel free to write it below and it
-            will get sent directly onchain to the manager of Base (Jesse Pollak).
+            feedback for the Base network, please feel free to write it below
+            and it will get sent directly onchain to the manager of Base (Jesse
+            Pollak).
           </p>
           <p className={styles.description}>
             If you want something done right, you've got to do it onchain!
@@ -67,10 +68,34 @@ const ComplaintBox = ({ recipient }) => {
       description: (
         <>
           <p className={styles.description}>
-            Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain to the manager of Coinbase (Brian Armstrong).
+            Welcome to Complain Onchain, darling! If you have a complaint or
+            feedback for Coinbase, please feel free to write it below and it
+            will get sent directly onchain to the manager of Coinbase (Brian
+            Armstrong).
           </p>
           <p className={styles.description}>
-            If you want something done right, you've got to do it onchain! Let's make Coinbase a better place, together.
+            If you want something done right, you've got to do it onchain! Let's
+            make Coinbase a better place, together.
+            <br />
+            Let's make Base a better place, together.
+          </p>
+        </>
+      ),
+    },
+
+    BasedMerch: {
+      address: "0x26A3737261178eed0E66a70967F2DBDd9798afb0",
+      backgroundImage: "/card_merch.png",
+      textColor: "white",
+      description: (
+        <>
+          <p className={styles.description}>
+            Welcome to Complain Onchain, darling! If you have a complaint or
+            feedback for Based Merch Store, please feel free to write it below
+            and it will get sent directly onchain to the manager of the store!
+          </p>
+          <p className={styles.description}>
+            If you want something done right, you've got to do it onchain!
             <br />
             Let's make Base a better place, together.
           </p>
@@ -257,11 +282,18 @@ const ComplaintBox = ({ recipient }) => {
 
   return (
     <div className={styles.container}>
-      <img src="/keren_sit.png" alt="Keren sitting" className={styles.kerenImage} />
-      
+      <img
+        src="/keren_sit.png"
+        alt="Keren sitting"
+        className={styles.kerenImage}
+      />
+
       {showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
       {isLoading && <LoadingOverlay />}
-      <h1 className={styles.heading}>Base Complaint Box - Complain to {recipient}</h1>
+      <h1 className={styles.heading}>
+        Base Complaint Box - Complain to{" "}
+        {recipient === "BasedMerch" ? "Based Merch Store" : recipient}
+      </h1>
       {recipientInfo[recipient].description}
       <form onSubmit={handleSubmit} className={styles.form}>
         <div className={styles.formGroup}>
@@ -297,16 +329,33 @@ const ComplaintBox = ({ recipient }) => {
               <span className={styles.checkmark}></span>
               Security and Privacy
             </label>
-            <label className={styles.checkboxLabel}>
-              <input type="checkbox" className={styles.checkbox} />
-              <span className={styles.checkmark}></span>
-              Support and Documentation
-            </label>
-            <label className={styles.checkboxLabel}>
-              <input type="checkbox" className={styles.checkbox} />
-              <span className={styles.checkmark}></span>
-              Community and Governance
-            </label>
+            {recipient === "BasedMerch" ? (
+              <>
+                <label className={styles.checkboxLabel}>
+                  <input type="checkbox" className={styles.checkbox} />
+                  <span className={styles.checkmark}></span>
+                  Support and Privacy
+                </label>
+                <label className={styles.checkboxLabel}>
+                  <input type="checkbox" className={styles.checkbox} />
+                  <span className={styles.checkmark}></span>
+                  Shipping
+                </label>
+              </>
+            ) : (
+              <>
+                <label className={styles.checkboxLabel}>
+                  <input type="checkbox" className={styles.checkbox} />
+                  <span className={styles.checkmark}></span>
+                  Support and Documentation
+                </label>
+                <label className={styles.checkboxLabel}>
+                  <input type="checkbox" className={styles.checkbox} />
+                  <span className={styles.checkmark}></span>
+                  Community and Governance
+                </label>
+              </>
+            )}
             <label className={styles.checkboxLabel}>
               <input type="checkbox" className={styles.checkbox} />
               <span className={styles.checkmark}></span>

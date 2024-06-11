@@ -9,12 +9,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-              <Homepage></Homepage>
-          }
-        />
+        <Route path="/" element={<Homepage></Homepage>} />
         <Route
           path="/jesse"
           element={
@@ -31,6 +26,17 @@ function App() {
             <div className="App">
               <img className="titleImage" src="title.png" alt="Title" />
               <ComplaintBox recipient="Brian" />
+              <Footer />
+            </div>
+          }
+        />
+
+        <Route
+          path="/basedmerch"
+          element={
+            <div className="App">
+              <img className="titleImage" src="title.png" alt="Title" />
+              <ComplaintBox recipient="BasedMerch" />
               <Footer />
             </div>
           }
