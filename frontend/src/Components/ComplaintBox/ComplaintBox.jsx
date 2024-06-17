@@ -111,8 +111,22 @@ const ComplaintBox = ({ recipient }) => {
         <>
           <p className={styles.description}>
             Welcome to Complain Onchain, darling! If you have a complaint or
-            feedback for Base Token Store, please feel free to write it below
-            and it will get sent directly onchain to the manager: mykcryptodev
+            feedback for{" "}
+            <a
+              href="https://www.basetokenstore.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Base Token Store
+            </a>
+            , please feel free to write it below and it will get sent directly
+            onchain to the manager: <a
+              href="https://x.com/mykcryptodev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              mykcryptodev
+            </a>
           </p>
           <p className={styles.description}>
             If you want something done right, you've got to do it onchain!
@@ -328,7 +342,7 @@ const ComplaintBox = ({ recipient }) => {
             recipient === "BasedMerch"
               ? "https://shop.slice.so/store/508"
               : recipient === "Mykcryptodev"
-              ? "https://x.com/mykcryptodev" 
+              ? "https://x.com/mykcryptodev"
               : getRecipientWebsite(recipient)
           }
           target="_blank"
