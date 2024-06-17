@@ -9,6 +9,7 @@ const Homepage = () => {
     { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
     { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
     { name: "Based Merch", link: "/basedmerch", title: "Store" },
+    {name: "Myk.eth", link: "/mykcryptodev", title: "(mykcryptodev)" },
   ];
 
   const filteredBoxes = complaintBoxes.filter((box) =>

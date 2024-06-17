@@ -41,6 +41,18 @@ function App() {
             </div>
           }
         />
+
+        <Route
+          path="/mykcryptodev"
+          element={
+            <div className="App">
+              <img className="titleImage" src="title.png" alt="Title" />
+              <ComplaintBox recipient="Mykcryptodev" />
+              <Footer />
+            </div>
+          }
+        />
+
         <Route
           path="/dashboard"
           element={

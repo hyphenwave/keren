@@ -102,6 +102,39 @@ const ComplaintBox = ({ recipient }) => {
         </>
       ),
     },
+
+    Mykcryptodev: {
+      address: "0x5079EC85c3c8F8E932Bd011B669b77d703DEEea7",
+      backgroundImage: "/card_myk.png",
+      textColor: "white",
+      description: (
+        <>
+          <p className={styles.description}>
+            Welcome to Complain Onchain, darling! If you have a complaint or
+            feedback for Base Token Store, please feel free to write it below
+            and it will get sent directly onchain to the manager: mykcryptodev
+          </p>
+          <p className={styles.description}>
+            If you want something done right, you've got to do it onchain!
+            <br />
+            Let's make Base a better place, together.
+          </p>
+        </>
+      ),
+    },
+  };
+
+  const getRecipientWebsite = (recipient) => {
+    switch (recipient) {
+      case "Jesse":
+        return "https://jesse.xyz/";
+      case "Brian":
+        return "https://x.com/brian_armstrong";
+      case "Mykcryptodev":
+        return "https://x.com/mykcryptodev";
+      default:
+        return "#";
+    }
   };
 
   const generateComplaintImage = async (complaint, userAddress) => {
@@ -292,7 +325,23 @@ const ComplaintBox = ({ recipient }) => {
       {isLoading && <LoadingOverlay />}
       <h1 className={styles.heading}>
         Base Complaint Box - Complain to{" "}
-        {recipient === "BasedMerch" ? "Based Merch Store" : recipient}
+        {recipient === "BasedMerch" ? (
+          <a
+            href="https://shop.slice.so/store/508"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Based Merch Store
+          </a>
+        ) : (
+          <a
+            href={getRecipientWebsite(recipient)}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {recipient}
+          </a>
+        )}
       </h1>
       {recipientInfo[recipient].description}
       <form onSubmit={handleSubmit} className={styles.form}>

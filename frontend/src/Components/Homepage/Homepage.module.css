@@ -1,155 +1,154 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 4rem 2rem;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+  height: 100vh;
+}
+
+.title {
+  font-size: 4rem;
+  margin-bottom: 4rem;
+  font-family: "sharkformal", sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+.searchBar {
+  all: unset;
+  width: 300px;
+  padding: 0.5rem;
+  margin-bottom: 4rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #fff;
+  font-family: "sharkformal", sans-serif;
+  color: #fff;
+  transition: all 0.2s ease-out;
+}
+
+.searchBar::placeholder {
+  color: #ffffff91;
+}
+
+.searchBar:focus,
+.searchBar:active {
+  transform: scale(1.1);
+}
+
+.boxesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
+  height: 6.5rem;
+  background-color: #a952b8;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #fff;
+  outline: 2px solid #fff;
+  transition: all 0.3s ease-in;
+  font-family: "sharkformal", sans-serif;
+  flex-direction: column;
+}
+
+.box:hover {
+  transform: scale(1.05);
+  background-color: #fff;
+  color: #a952b8;
+}
+
+.noResults {
+  font-size: 1.5rem;
+  color: #888;
+  font-family: "sharkformal", sans-serif;
+}
+
+.Footer {
+  margin-top: auto;
+  display: flex;
+  gap: 1.5rem;
+  font-family: "sharkformal", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.webLink {
+  font-weight: 400;
+  animation: pulsate 1.5s infinite;
+}
+
+.Footer a,
+.Footer a:link,
+.Footer a:visited {
+  color: white;
+  text-decoration: none;
+  transition: all 0.2s ease-out;
+  font-size: 1rem;
+}
+
+.Footer a:hover {
+  transform: scale(1.2);
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 500px) {
   .title {
-    font-size: 4rem;
-    margin-bottom: 4rem;
-    font-family: "sharkformal", sans-serif;
-    color: #fff;
-    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
   }
-  
+
   .searchBar {
-    all: unset;
-    width: 300px;
-    padding: 0.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     font-size: 1rem;
     border-radius: 4px;
     border: 1px solid #fff;
     font-family: "sharkformal", sans-serif;
     color: #fff;
-    transition: all .2s ease-out;
+    transition: all 0.2s ease-out;
   }
 
-  .searchBar::placeholder {
-    color: #ffffff91;
-  }
-
-  .searchBar:focus, .searchBar:active {
-    transform: scale(1.1)
-  }
-  
-  .boxesContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-  }
-  
-  .box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 12rem;
-    height: 6.5rem;
-    background-color: #A952B8;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    text-decoration: none;
-    color: #fff;
-    outline: 2px solid #fff;
-    transition: all 0.3s ease-in;
-    font-family: "sharkformal", sans-serif;
-    flex-direction: column;
-  }
-  
-  .box:hover {
-    transform: scale(1.05);
-    background-color: #fff;
-    color: #A952B8;
-  }
-  
-  .noResults {
-    font-size: 1.5rem;
-    color: #888;
-    font-family: "sharkformal", sans-serif;
-  }
-
-  .Footer {
-    margin-top: auto;
-    display: flex;
-    gap: 1.5rem;
-    font-family: "sharkformal", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-  
-  .webLink {
-    font-weight: 400;
-    animation: pulsate 1.5s infinite;
-  }
-  
   .Footer a,
   .Footer a:link,
   .Footer a:visited {
-    color: white;
-    text-decoration: none;
-    transition: all 0.2s ease-out;
+    font-size: 0.7rem;
+  }
+
+  .Footer {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .boxesContainer {
+    gap: 1rem;
+  }
+
+  .box {
+    width: 12rem;
+    height: 4.5rem;
     font-size: 1rem;
   }
-  
-  .Footer a:hover {
-    transform: scale(1.2);
-  }
-
-  @keyframes pulsate {
-    0% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.1);
-      opacity: 0.8;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
-  @media screen and (max-width: 500px) {
-
-    .title {
-      font-size: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .searchBar {
-      margin-bottom: 2rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      border: 1px solid #fff;
-      font-family: "sharkformal", sans-serif;
-      color: #fff;
-      transition: all .2s ease-out;
-    }
-
-    .Footer a,
-    .Footer a:link,
-    .Footer a:visited {
-      font-size: 0.7rem;
-    }
-  
-    .Footer {
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .boxesContainer {
-      gap: 1rem;
-    }
-    
-    .box {
-    
-      font-size: 1rem;
-      
-    }
-  }
-  
+}
