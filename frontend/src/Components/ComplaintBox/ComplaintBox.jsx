@@ -130,8 +130,6 @@ const ComplaintBox = ({ recipient }) => {
         return "https://jesse.xyz/";
       case "Brian":
         return "https://x.com/brian_armstrong";
-      case "Mykcryptodev":
-        return "https://x.com/mykcryptodev";
       default:
         return "#";
     }
@@ -325,23 +323,23 @@ const ComplaintBox = ({ recipient }) => {
       {isLoading && <LoadingOverlay />}
       <h1 className={styles.heading}>
         Base Complaint Box - Complain to{" "}
-        {recipient === "BasedMerch" ? (
-          <a
-            href="https://shop.slice.so/store/508"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Based Merch Store
-          </a>
-        ) : (
-          <a
-            href={getRecipientWebsite(recipient)}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {recipient}
-          </a>
-        )}
+        <a
+          href={
+            recipient === "BasedMerch"
+              ? "https://shop.slice.so/store/508"
+              : recipient === "Mykcryptodev"
+              ? "https://x.com/mykcryptodev" 
+              : getRecipientWebsite(recipient)
+          }
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {recipient === "BasedMerch"
+            ? "Based Merch Store"
+            : recipient === "Mykcryptodev"
+            ? "Base Token Store"
+            : recipient}
+        </a>
       </h1>
       {recipientInfo[recipient].description}
       <form onSubmit={handleSubmit} className={styles.form}>

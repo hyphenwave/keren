@@ -43,6 +43,10 @@
   gap: 2rem;
 }
 
+.boxesText {
+  text-align: center;
+}
+
 .box {
   display: flex;
   justify-content: center;

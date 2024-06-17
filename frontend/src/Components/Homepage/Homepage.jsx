@@ -9,7 +9,7 @@ const Homepage = () => {
     { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
     { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
     { name: "Based Merch", link: "/basedmerch", title: "Store" },
-    {name: "Myk.eth", link: "/mykcryptodev", title: "(mykcryptodev)" },
+    {name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
   ];
 
   const filteredBoxes = complaintBoxes.filter((box) =>
@@ -30,7 +30,7 @@ const Homepage = () => {
         {filteredBoxes.length > 0 ? (
           filteredBoxes.map((box) => (
             <Link key={box.name} to={box.link} className={styles.box}>
-              <div>Complain To {box.name}</div>
+              <div className={styles.boxesText}>Complain To {box.name}</div>
               <br></br>
               <div>{box.title}</div>
             </Link>
