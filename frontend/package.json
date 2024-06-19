@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tanstack/react-query": "^5.45.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@wagmi/connectors": "^5.0.14",
     "@web3modal/ethers": "^4.1.11",
     "axios": "^1.7.2",
     "canvas": "^2.11.2",
+    "connectkit": "^1.8.2",
     "ethers": "^6.12.1",
     "form-data": "^4.0.0",
     "react": "^18.3.0",
@@ -16,6 +19,8 @@
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "sweetalert2": "^11.10.8",
+    "viem": "^2.15.1",
+    "wagmi": "^2.10.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
