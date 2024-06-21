@@ -3,7 +3,7 @@ import styles from "./ComplaintBox.module.css";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import ConsentPopup from "../ConsentPopup/ConsentPopup";
 import Swal from "sweetalert2";
-import { TokenAddress, TokenABI } from "../../Helper/helper";
+import { TokenAddress } from "../../Helper/helper";
 import {
 	pinFileToIPFS,
 	pinJSONToIPFS,
@@ -11,9 +11,10 @@ import {
 } from "../../pinata";
 import config from "../../config";
 import { ConnectKitProvider, ConnectKitButton } from "connectkit";
-import { useAccount, useWriteContract } from 'wagmi'
-import { waitForTransactionReceipt, readContract } from "@wagmi/core"
-import abi from "./abi.json"
+import { useAccount, useWriteContract } from 'wagmi';
+import { waitForTransactionReceipt, readContract } from "@wagmi/core";
+import abi from "./abi.json";
+import { BlackCreateWalletButton } from '../BlackCreateWalletButton/BlackCreateWalletButton';
 // const ethersConfig = defaultConfig({ metadata });
 
 const ComplaintBox = ({ recipient }) => {
@@ -205,7 +206,6 @@ const ComplaintBox = ({ recipient }) => {
 		try {
 			setIsLoading(true);
 
-			console.log(TokenABI.length)
 			const totalSupply = await readContract(config, {
 				abi,
 				address: TokenAddress,
@@ -245,9 +245,9 @@ const ComplaintBox = ({ recipient }) => {
 
 			console.log("sent tx")
 
-			const mintReceipt =  await waitForTransactionReceipt(config, {
+			const mintReceipt = await waitForTransactionReceipt(config, {
 				hash: hash,
-			  })
+			})
 
 			// Log the mint transaction receipt to check for emitted events
 
@@ -410,13 +410,17 @@ const ComplaintBox = ({ recipient }) => {
 							}
 
 							return (
-								<button
-									type="button"
-									onClick={() => show()}
-									className={styles.button}
-								>
-									Connect Wallet
-								</button>
+								<div className={styles.buttonBox}>
+									<BlackCreateWalletButton width={200} height={48} />
+
+									<button
+										type="button"
+										onClick={() => show()}
+										className={styles.button}
+									>
+										Connect Wallet
+									</button>
+								</div>
 							)
 						}}
 					</ConnectKitButton.Custom>
