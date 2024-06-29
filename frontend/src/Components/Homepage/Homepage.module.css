@@ -16,7 +16,8 @@
 }
 
 .searchBar {
-  width: 300px;
+  width: 100%;
+  max-width: 300px;
   padding: 0.5rem;
   margin-bottom: 2rem;
   font-size: 1rem;
@@ -30,12 +31,14 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-.boxesContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.boxesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
+  width: 100%;
+  max-width: 800px;
   margin-bottom: 2rem;
+  justify-content: center;
 }
 
 .box {
@@ -43,7 +46,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 200px;
   height: 80px;
   background-color: transparent;
   border: 1px solid #fff;
@@ -52,6 +54,7 @@
   color: #fff;
   text-align: center;
   transition: all 0.3s ease;
+  padding: 0.5rem;
 }
 
 .box:hover {
@@ -62,7 +65,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 400px;
+  max-width: 800px;
   gap: 1rem;
 }
 
@@ -95,10 +98,6 @@
 }
 
 .categoryContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   margin-top: 1rem;
 }
 
@@ -110,9 +109,12 @@
 .Footer {
   margin-top: auto;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   font-weight: 100;
   font-style: italic;
+  padding: 1rem 0;
 }
 
 .Footer a {
@@ -126,24 +128,18 @@
   transform: scale(1.1);
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .title {
     font-size: 2rem;
   }
 
-  .searchBar {
-    width: 100%;
-    max-width: 300px;
+  .boxesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 
   .box {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .Footer {
-    flex-wrap: wrap;
-    justify-content: center;
+    height: 70px;
+    font-size: 0.9rem;
   }
 
   .Footer a {

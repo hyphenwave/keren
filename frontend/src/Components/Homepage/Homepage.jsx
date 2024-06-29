@@ -11,17 +11,14 @@ const Homepage = () => {
       { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
       { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
     ],
-    projects: [
+    "ecosystem projects": [
       { name: "Based Merch", link: "/basedmerch", title: "Store" },
       { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
-      { name: "Boris", link: "/boris", title: "(Boris The Wizard)" },
-      { name: "TYBG", link: "/tybg", title: "(Based God)" },
       { name: "PokPok", link: "/pokpok", title: "(Nibel.eth)" },
-
-
     ],
     communities: [
-      // Add community boxes here
+      { name: "TYBG", link: "/tybg", title: "(Based God)" },
+      { name: "Boris", link: "/boris", title: "(Boris The Wizard)" },
     ],
     influencers: [
       // Add influencer boxes here
@@ -59,7 +56,7 @@ const Homepage = () => {
         onChange={(e) => setSearchQuery(e.target.value)}
         className={styles.searchBar}
       />
-      <div className={styles.boxesContainer}>
+      <div className={styles.boxesGrid}>
         {renderBoxes(complaintBoxes.pinned)}
       </div>
       <div className={styles.categoriesContainer}>
@@ -79,7 +76,9 @@ const Homepage = () => {
               </button>
               {(isSearchActive || expandedCategory === category) && filteredBoxes.length > 0 && (
                 <div className={styles.categoryContent}>
-                  {renderBoxes(filteredBoxes)}
+                  <div className={styles.boxesGrid}>
+                    {renderBoxes(filteredBoxes)}
+                  </div>
                 </div>
               )}
             </div>
