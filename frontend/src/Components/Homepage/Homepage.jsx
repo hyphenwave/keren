@@ -10,6 +10,7 @@ const Homepage = () => {
     pinned: [
       { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
       { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
+      { name: "TYBG", link: "/tybg", title: "(Based God)" },
     ],
     "ecosystem projects": [
       { name: "Based Merch", link: "/basedmerch", title: "Store" },
