@@ -102,6 +102,11 @@
   margin-top: 1rem;
 }
 
+.noResults {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
 .Footer {
   margin-top: auto;
   display: flex;

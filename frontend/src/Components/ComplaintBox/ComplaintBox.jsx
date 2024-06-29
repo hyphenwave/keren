@@ -123,6 +123,23 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
+		Boris: {
+			address: "0x4381C13BC325349a5214B463Eb85DD660A9629B5",
+			backgroundImage: "/card_boris.png",
+			textColor: "black",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or feedback for the Boris The Wizard, please feel free to write it below and it will get sent directly onchain to the manager of Boris.
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
 	};
 
 	const getRecipientWebsite = (recipient) => {
@@ -322,7 +339,9 @@ const ComplaintBox = ({ recipient }) => {
 						? "Based Merch Store"
 						: recipient === "Mykcryptodev"
 							? "Base Token Store"
-							: recipient}
+							: recipient === "Boris"
+								? "Boris The Wizard"
+								: recipient}
 				</a>
 			</h1>
 			{recipientInfo[recipient].description}

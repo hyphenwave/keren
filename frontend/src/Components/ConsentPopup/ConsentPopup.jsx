@@ -25,7 +25,7 @@ const ConsentPopup = ({ onAccept }) => {
           We value transparency and accountability. Your feedback, even if categorized as a "complaint," serves the purpose of constructive improvement. Through this process, we aim to foster positive interactions and meaningful resolutions within the Base community!
         </p>
         <p className={styles.disclaimer}>
-          Disclaimer: We take no responsibility for your submitted feedback beyond its transmission and representation as an NFT on the blockchain. This includes any content containing insults, harassment, threats, or other forms of harmful language.
+        Disclaimer: We take no responsibility for your submitted feedback beyond its transmission and representation as an NFT on the blockchain. This includes any content containing insults, harassment, threats, or other forms of harmful language. Any project can apply to get its complaint box listed, and we are not responsible for the actions or conduct of any listed projects.
         </p>
         <div className={styles.checkboxContainer}>
           <label className={styles.checkboxLabel}>

@@ -8,35 +8,31 @@ import Homepage from "./Components/Homepage/Homepage";
 import config from "./config";
 import { WagmiProvider } from "wagmi";
 
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-
 const Footer = () => {
-	return (
-	  <div className="Footer">
-		<a href="https://www.basedkeren.com/" className="webLink">
-		  Keren Website
-		</a>
-		<a href="https://t.me/kerenbase">Telegram</a>
-		<a href="https://dexscreener.com/base/0x1ca25a133160beb02b18c1983c997fafbe98bc6e">
-		  Chart
-		</a>
-		<a href="https://warpcast.com/basedkeren">Warpcast</a>
-		<a href="https://www.dextools.io/app/en/base/pair-explorer/0x1ca25a133160beb02b18c1983c997fafbe98bc6e?t=1715622444271">
-		  Video Tutorial
-		</a>
-		<a href="/dashboard">Dashboard</a>
-	  </div>
-	);
-  };
+  return (
+    <div className="Footer">
+      <a href="https://www.basedkeren.com/" className="webLink">
+        Keren Website
+      </a>
+      <a href="https://t.me/kerenbase">Telegram</a>
+      <a href="https://dexscreener.com/base/0x1ca25a133160beb02b18c1983c997fafbe98bc6e">
+        Chart
+      </a>
+      <a href="https://warpcast.com/basedkeren">Warpcast</a>
+      <a href="https://www.dextools.io/app/en/base/pair-explorer/0x1ca25a133160beb02b18c1983c997fafbe98bc6e?t=1715622444271">
+        Video Tutorial
+      </a>
+      <a href="/dashboard">Dashboard</a>
+    </div>
+  );
+};
 
-  
 root.render(
   <WagmiProvider config={config}>
     <QueryClientProvider client={queryClient}>
@@ -81,6 +77,17 @@ root.render(
               <div className="App">
                 <img className="titleImage" src="title.png" alt="Title" />
                 <ComplaintBox recipient="Mykcryptodev" />
+                <Footer />
+              </div>
+            }
+          />
+
+          <Route
+            path="/boris"
+            element={
+              <div className="App">
+                <img className="titleImage" src="title.png" alt="Title" />
+                <ComplaintBox recipient="Boris" />
                 <Footer />
               </div>
             }

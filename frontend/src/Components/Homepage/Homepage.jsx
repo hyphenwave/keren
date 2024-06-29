@@ -14,6 +14,7 @@ const Homepage = () => {
     projects: [
       { name: "Based Merch", link: "/basedmerch", title: "Store" },
       { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
+      { name: "Boris", link: "/boris", title: "(Boris The Wizard)" },
     ],
     communities: [
       // Add community boxes here
@@ -42,6 +43,8 @@ const Homepage = () => {
     ));
   };
 
+  const isSearchActive = searchQuery.trim() !== "";
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Complain OnChain</h1>
@@ -58,6 +61,7 @@ const Homepage = () => {
       <div className={styles.categoriesContainer}>
         {Object.entries(complaintBoxes).map(([category, boxes]) => {
           if (category === 'pinned') return null;
+          const filteredBoxes = filterBoxes(boxes);
           return (
             <div key={category} className={styles.category}>
               <button
@@ -69,15 +73,20 @@ const Homepage = () => {
                   {expandedCategory === category ? '▼' : '▶'}
                 </span>
               </button>
-              {expandedCategory === category && (
+              {(isSearchActive || expandedCategory === category) && filteredBoxes.length > 0 && (
                 <div className={styles.categoryContent}>
-                  {renderBoxes(boxes)}
+                  {renderBoxes(filteredBoxes)}
                 </div>
               )}
             </div>
           );
         })}
       </div>
+      {isSearchActive && Object.values(complaintBoxes).flat().filter(box => 
+        box.name.toLowerCase().includes(searchQuery.toLowerCase())
+      ).length === 0 && (
+        <p className={styles.noResults}>No results found</p>
+      )}
       <Footer />
     </div>
   );
