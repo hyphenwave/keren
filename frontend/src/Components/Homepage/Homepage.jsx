@@ -15,6 +15,10 @@ const Homepage = () => {
       { name: "Based Merch", link: "/basedmerch", title: "Store" },
       { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
       { name: "Boris", link: "/boris", title: "(Boris The Wizard)" },
+      { name: "TYBG", link: "/tybg", title: "(Based God)" },
+      { name: "PokPok", link: "/pokpok", title: "(Nibel.eth)" },
+
+
     ],
     communities: [
       // Add community boxes here

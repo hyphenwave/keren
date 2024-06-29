@@ -93,6 +93,28 @@ root.render(
             }
           />
 
+<Route
+            path="/tybg"
+            element={
+              <div className="App">
+                <img className="titleImage" src="title.png" alt="Title" />
+                <ComplaintBox recipient="TYBG" />
+                <Footer />
+              </div>
+            }
+          />
+
+<Route
+            path="/pokpok"
+            element={
+              <div className="App">
+                <img className="titleImage" src="title.png" alt="Title" />
+                <ComplaintBox recipient="PokPok" />
+                <Footer />
+              </div>
+            }
+          />
+
           <Route
             path="/dashboard"
             element={

@@ -140,6 +140,40 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
+		TYBG: {
+			address: "0x2270a4ca23614eCE42905045b1fF2CB2a396c4Ff",
+			backgroundImage: "/card_tybg.png",
+			textColor: "black",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or feedback for Based God, please feel free to write it below and it will get sent directly onchain to the manager of TYBG ( Based Disciple ).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
+		PokPok: {
+			address: "0xC2ca7C647c7959F14700d8fD5B6219b44Ca56930",
+			backgroundImage: "/card_pok.png",
+			textColor: "black",
+			description: (
+				<>
+					<p className={styles.description}>
+					Welcome to Complain Onchain, darling! If you have a complaint or feedback for the PokPok Protocol, please feel free to write it below and it will get sent directly onchain to the manager of PokPok (Nibel.eth).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
 	};
 
 	const getRecipientWebsite = (recipient) => {
@@ -341,6 +375,8 @@ const ComplaintBox = ({ recipient }) => {
 							? "Base Token Store"
 							: recipient === "Boris"
 								? "Boris The Wizard"
+							: recipient === "TYBG"
+								? "Based God"
 								: recipient}
 				</a>
 			</h1>
