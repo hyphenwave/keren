@@ -4,17 +4,43 @@ import styles from "./Homepage.module.css";
 
 const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [expandedCategory, setExpandedCategory] = useState(null);
 
-  const complaintBoxes = [
-    { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
-    { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
-    { name: "Based Merch", link: "/basedmerch", title: "Store" },
-    {name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
-  ];
+  const complaintBoxes = {
+    pinned: [
+      { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
+      { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
+    ],
+    projects: [
+      { name: "Based Merch", link: "/basedmerch", title: "Store" },
+      { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
+    ],
+    communities: [
+      // Add community boxes here
+    ],
+    influencers: [
+      // Add influencer boxes here
+    ],
+  };
 
-  const filteredBoxes = complaintBoxes.filter((box) =>
-    box.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const toggleCategory = (category) => {
+    setExpandedCategory(expandedCategory === category ? null : category);
+  };
+
+  const filterBoxes = (boxes) => {
+    return boxes.filter((box) =>
+      box.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  };
+
+  const renderBoxes = (boxes) => {
+    return filterBoxes(boxes).map((box) => (
+      <Link key={box.name} to={box.link} className={styles.box}>
+        <div>Complain To {box.name}</div>
+        <div>{box.title}</div>
+      </Link>
+    ));
+  };
 
   return (
     <div className={styles.container}>
@@ -27,19 +53,31 @@ const Homepage = () => {
         className={styles.searchBar}
       />
       <div className={styles.boxesContainer}>
-        {filteredBoxes.length > 0 ? (
-          filteredBoxes.map((box) => (
-            <Link key={box.name} to={box.link} className={styles.box}>
-              <div className={styles.boxesText}>Complain To {box.name}</div>
-              <br></br>
-              <div>{box.title}</div>
-            </Link>
-          ))
-        ) : (
-          <p className={styles.noResults}>No results</p>
-        )}
+        {renderBoxes(complaintBoxes.pinned)}
       </div>
-
+      <div className={styles.categoriesContainer}>
+        {Object.entries(complaintBoxes).map(([category, boxes]) => {
+          if (category === 'pinned') return null;
+          return (
+            <div key={category} className={styles.category}>
+              <button
+                className={styles.categoryButton}
+                onClick={() => toggleCategory(category)}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+                <span className={styles.expandIcon}>
+                  {expandedCategory === category ? '▼' : '▶'}
+                </span>
+              </button>
+              {expandedCategory === category && (
+                <div className={styles.categoryContent}>
+                  {renderBoxes(boxes)}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
       <Footer />
     </div>
   );

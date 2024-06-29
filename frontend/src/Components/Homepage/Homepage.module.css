@@ -2,157 +2,146 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rem 2rem;
-  height: 100vh;
+  padding: 2rem;
+  min-height: 100vh;
+  background-color: #a952b8;
+  color: white;
+  font-family: "sharkformal", sans-serif;
 }
 
 .title {
-  font-size: 4rem;
-  margin-bottom: 4rem;
-  font-family: "sharkformal", sans-serif;
-  color: #fff;
+  font-size: 3rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
 .searchBar {
-  all: unset;
   width: 300px;
   padding: 0.5rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   font-size: 1rem;
   border-radius: 4px;
   border: 1px solid #fff;
-  font-family: "sharkformal", sans-serif;
+  background-color: transparent;
   color: #fff;
-  transition: all 0.2s ease-out;
 }
 
 .searchBar::placeholder {
-  color: #ffffff91;
-}
-
-.searchBar:focus,
-.searchBar:active {
-  transform: scale(1.1);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .boxesContainer {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-}
-
-.boxesText {
-  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .box {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 12rem;
-  height: 6.5rem;
-  background-color: #a952b8;
+  width: 200px;
+  height: 80px;
+  background-color: transparent;
+  border: 1px solid #fff;
   border-radius: 8px;
-  font-size: 1.2rem;
   text-decoration: none;
   color: #fff;
-  outline: 2px solid #fff;
-  transition: all 0.3s ease-in;
-  font-family: "sharkformal", sans-serif;
-  flex-direction: column;
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
 .box:hover {
-  transform: scale(1.05);
-  background-color: #fff;
-  color: #a952b8;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
-.noResults {
-  font-size: 1.5rem;
-  color: #888;
-  font-family: "sharkformal", sans-serif;
+.categoriesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  gap: 1rem;
+}
+
+.category {
+  width: 100%;
+}
+
+.categoryButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.categoryButton:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.expandIcon {
+  font-size: 0.8rem;
+}
+
+.categoryContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .Footer {
   margin-top: auto;
   display: flex;
-  gap: 1.5rem;
-  font-family: "sharkformal", sans-serif;
+  gap: 1rem;
   font-weight: 100;
   font-style: italic;
-  margin-bottom: 1rem;
 }
 
-.webLink {
-  font-weight: 400;
-  animation: pulsate 1.5s infinite;
-}
-
-.Footer a,
-.Footer a:link,
-.Footer a:visited {
+.Footer a {
   color: white;
   text-decoration: none;
+  font-size: 0.9rem;
   transition: all 0.2s ease-out;
-  font-size: 1rem;
 }
 
 .Footer a:hover {
-  transform: scale(1.2);
-}
-
-@keyframes pulsate {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  transform: scale(1.1);
 }
 
 @media screen and (max-width: 500px) {
   .title {
     font-size: 2rem;
-    margin-bottom: 2rem;
   }
 
   .searchBar {
-    margin-bottom: 2rem;
-    font-size: 1rem;
-    border-radius: 4px;
-    border: 1px solid #fff;
-    font-family: "sharkformal", sans-serif;
-    color: #fff;
-    transition: all 0.2s ease-out;
-  }
-
-  .Footer a,
-  .Footer a:link,
-  .Footer a:visited {
-    font-size: 0.7rem;
-  }
-
-  .Footer {
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .boxesContainer {
-    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
   }
 
   .box {
-    width: 12rem;
-    height: 4.5rem;
-    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .Footer {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .Footer a {
+    font-size: 0.8rem;
   }
 }
