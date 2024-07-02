@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styles from "./ComplaintBox.module.css";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import ConsentPopup from "../ConsentPopup/ConsentPopup";
@@ -17,10 +17,14 @@ import abi from "./abi.json";
 import { BlackCreateWalletButton } from '../BlackCreateWalletButton/BlackCreateWalletButton';
 // const ethersConfig = defaultConfig({ metadata });
 
+
+const isTestnet = process.env.REACT_APP_USE_TESTNET === 'true';
+
 const ComplaintBox = ({ recipient }) => {
 	const [complaint, setComplaint] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [showConsentPopup, setShowConsentPopup] = useState(true);
+	const [checkboxes, setCheckboxes] = useState({});
 	const { address } = useAccount();
 	const canvasRef = useRef(null);
 
@@ -164,7 +168,7 @@ const ComplaintBox = ({ recipient }) => {
 			description: (
 				<>
 					<p className={styles.description}>
-					Welcome to Complain Onchain, darling! If you have a complaint or feedback for the PokPok Protocol, please feel free to write it below and it will get sent directly onchain to the manager of PokPok (Nibel.eth).
+						Welcome to Complain Onchain, darling! If you have a complaint or feedback for the PokPok Protocol, please feel free to write it below and it will get sent directly onchain to the manager of PokPok (Nibel.eth).
 					</p>
 					<p className={styles.description}>
 						If you want something done right, you've got to do it onchain!
@@ -174,6 +178,48 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
+	};
+
+	const getCheckboxOptions = (recipient) => {
+		const commonOptions = [
+			{ name: "transactionSpeedFees", label: "Transaction Speed and Fees" },
+			{ name: "coinbaseWalletUsability", label: "Coinbase Wallet and dApp Usability" },
+			{ name: "securityPrivacy", label: "Security and Privacy" },
+		];
+
+		if (recipient === "BasedMerch") {
+			return [
+				...commonOptions,
+				{ name: "supportPrivacy", label: "Support and Privacy" },
+				{ name: "shipping", label: "Shipping" },
+				{ name: "others", label: "Others" },
+			];
+		} else {
+			return [
+				...commonOptions,
+				{ name: "supportDocumentation", label: "Support and Documentation" },
+				{ name: "communityGovernance", label: "Community and Governance" },
+				{ name: "others", label: "Others" },
+			];
+		}
+	};
+
+	const checkboxOptions = getCheckboxOptions(recipient);
+
+	useEffect(() => {
+		const checkboxOptions = getCheckboxOptions(recipient);
+		const initialCheckboxes = checkboxOptions.reduce((acc, option) => {
+		  acc[option.name] = false;
+		  return acc;
+		}, {});
+		setCheckboxes(initialCheckboxes);
+	  }, [recipient]);
+
+	const handleCheckboxChange = (event) => {
+		setCheckboxes({
+			...checkboxes,
+			[event.target.name]: event.target.checked,
+		});
 	};
 
 	const getRecipientWebsite = (recipient) => {
@@ -280,7 +326,12 @@ const ComplaintBox = ({ recipient }) => {
 				description: complaint,
 				external_url: "https://www.basedkeren.com/",
 				image: `ipfs://${imageHash}`,
+				attributes: checkboxOptions.map(option => ({
+					trait_type: option.label,
+					value: checkboxes[option.name] ? "Yes" : "No",
+				})),
 			};
+
 
 			// Pin the metadata to IPFS
 			const metadataFileName = `metadata-${randomString}.json`;
@@ -348,6 +399,11 @@ const ComplaintBox = ({ recipient }) => {
 
 	return (
 		<div className={styles.container}>
+			{isTestnet && (
+				<div className={styles.testnetBanner}>
+					You are currently on the Testnet
+				</div>
+			)}
 			<img
 				src="/keren_sit.png"
 				alt="Keren sitting"
@@ -375,9 +431,9 @@ const ComplaintBox = ({ recipient }) => {
 							? "Base Token Store"
 							: recipient === "Boris"
 								? "Boris The Wizard"
-							: recipient === "TYBG"
-								? "Based God"
-								: recipient}
+								: recipient === "TYBG"
+									? "Based God"
+									: recipient}
 				</a>
 			</h1>
 			{recipientInfo[recipient].description}
@@ -400,53 +456,19 @@ const ComplaintBox = ({ recipient }) => {
 				<div className={styles.relatedToSection}>
 					<p className={styles.relatedToText}>Related to:</p>
 					<div className={styles.checkboxGroup}>
-						<label className={styles.checkboxLabel}>
-							<input type="checkbox" className={styles.checkbox} />
-							<span className={styles.checkmark}></span>
-							Transaction Speed and Fees
-						</label>
-						<label className={styles.checkboxLabel}>
-							<input type="checkbox" className={styles.checkbox} />
-							<span className={styles.checkmark}></span>
-							Coinbase Wallet and dApp Usability
-						</label>
-						<label className={styles.checkboxLabel}>
-							<input type="checkbox" className={styles.checkbox} />
-							<span className={styles.checkmark}></span>
-							Security and Privacy
-						</label>
-						{recipient === "BasedMerch" ? (
-							<>
-								<label className={styles.checkboxLabel}>
-									<input type="checkbox" className={styles.checkbox} />
-									<span className={styles.checkmark}></span>
-									Support and Privacy
-								</label>
-								<label className={styles.checkboxLabel}>
-									<input type="checkbox" className={styles.checkbox} />
-									<span className={styles.checkmark}></span>
-									Shipping
-								</label>
-							</>
-						) : (
-							<>
-								<label className={styles.checkboxLabel}>
-									<input type="checkbox" className={styles.checkbox} />
-									<span className={styles.checkmark}></span>
-									Support and Documentation
-								</label>
-								<label className={styles.checkboxLabel}>
-									<input type="checkbox" className={styles.checkbox} />
-									<span className={styles.checkmark}></span>
-									Community and Governance
-								</label>
-							</>
-						)}
-						<label className={styles.checkboxLabel}>
-							<input type="checkbox" className={styles.checkbox} />
-							<span className={styles.checkmark}></span>
-							Others
-						</label>
+						{checkboxOptions.map((option) => (
+							<label key={option.name} className={styles.checkboxLabel}>
+								<input
+									type="checkbox"
+									name={option.name}
+									checked={checkboxes[option.name]}
+									onChange={handleCheckboxChange}
+									className={styles.checkbox}
+								/>
+								<span className={styles.checkmark}></span>
+								{option.label}
+							</label>
+						))}
 					</div>
 				</div>
 				<canvas

@@ -77,6 +77,14 @@ const Dashboard = () => {
     setCurrentPage(1);
   };
 
+  const getCategories = (attributes) => {
+    if (!attributes) return "N/A";
+    return attributes
+      .filter(attr => attr.value === "Yes")
+      .map(attr => attr.trait_type)
+      .join(", ");
+  };
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.header}>
@@ -94,52 +102,56 @@ const Dashboard = () => {
         <LoadingOverlay />
       ) : (
         <>
-          <table>
-            <thead>
-              <tr>
-                <th>Token ID</th>
-                <th>Description</th>
-                <th>Image</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentNfts.map((nft) => (
-                <tr key={nft.id.tokenId}>
-                  <td>{nft.title}</td>
-                  <td>
-                    {expandedDescriptions[nft.id.tokenId] ? (
-                      <div>
-                        {nft.metadata.description}{" "}
-                        <button
-                          onClick={() => toggleDescription(nft.id.tokenId)}
-                        >
-                          Show Less
-                        </button>
-                      </div>
-                    ) : (
-                      <div>
-                        {nft.metadata.description.slice(0, 50)}...{" "}
-                        <button
-                          onClick={() => toggleDescription(nft.id.tokenId)}
-                        >
-                          Read More
-                        </button>
-                      </div>
-                    )}
-                  </td>
-                  <td>
-                    <a
-                      href={formatIpfsLink(nft.media[0].gateway)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View Image
-                    </a>
-                  </td>
+          <div className={styles.tableContainer}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Token ID</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Image</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentNfts.map((nft) => (
+                  <tr key={nft.id.tokenId}>
+                    <td>{nft.title}</td>
+                    <td>
+                      {expandedDescriptions[nft.id.tokenId] ? (
+                        <div>
+                          {nft.metadata.description}{" "}
+                          <button
+                            onClick={() => toggleDescription(nft.id.tokenId)}
+                          >
+                            Show Less
+                          </button>
+                        </div>
+                      ) : (
+                        <div>
+                          {nft.metadata.description.slice(0, 50)}...{" "}
+                          <button
+                            onClick={() => toggleDescription(nft.id.tokenId)}
+                          >
+                            Read More
+                          </button>
+                        </div>
+                      )}
+                    </td>
+                    <td>{getCategories(nft.metadata.attributes)}</td>
+                    <td>
+                      <a
+                        href={formatIpfsLink(nft.media[0].gateway)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        View Image
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <Pagination
             nftsPerPage={nftsPerPage}
             totalNfts={nfts.length}

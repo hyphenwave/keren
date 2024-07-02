@@ -12,6 +12,19 @@
   font-style: normal;
 }
 
+.testnetBanner {
+  background-color: #ffff00;
+  color: #000000;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
 .container {
   max-width: 800px;
   margin: 0 auto;

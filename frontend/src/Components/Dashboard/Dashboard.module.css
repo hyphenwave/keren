@@ -6,9 +6,13 @@
 }
 
 .dashboard {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.tableContainer {
+  overflow-x: auto;
 }
 
 table {
@@ -31,7 +35,7 @@ th {
 td {
   text-align: left;
   word-wrap: break-word;
-  max-width: 400px;
+  max-width: 200px;
   font-family: "Helvetica Neue", sans-serif;
 }
 
@@ -121,7 +125,14 @@ button {
 
 @media screen and (max-width: 1200px) {
   td {
-    max-width: 300px;
+    max-width: 150px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  td {
+    max-width: 100px;
+    font-size: 0.9rem;
   }
 }
 
@@ -142,15 +153,16 @@ button {
     width: 100%;
     text-align: center;
   }
+
+  td {
+    font-size: 0.8rem;
+  }
 }
 
 @media screen and (max-width: 600px) {
   .dashboard {
     max-width: 100%;
-  }
-
-  td {
-    font-size: 0.75rem;
+    padding: 1rem;
   }
 
   .header {
@@ -175,7 +187,7 @@ button {
 
 @media screen and (max-width: 400px) {
   .dashboard {
-    padding: 0;
+    padding: 0.5rem;
   }
 
   .backLink {
@@ -188,5 +200,10 @@ button {
 
   .header {
     padding: 0 1rem;
+  }
+
+  td {
+    font-size: 0.7rem;
+    padding: 0.5rem;
   }
 }
