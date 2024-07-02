@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { createClient } from '@supabase/supabase-js';
 import styles from "./Dashboard.module.css";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlayDashboard";
 import { Link } from "react-router-dom";
+
+const supabase = createClient(process.env.REACT_APP_SUPABASE_URL, process.env.REACT_APP_SUPABASE_ANON_KEY);
 
 const Dashboard = () => {
   const [nfts, setNfts] = useState([]);
@@ -24,14 +27,31 @@ const Dashboard = () => {
         let nextToken = null;
 
         do {
-          const url = `${baseURL}?contractAddress=${address}&withMetadata=${withMetadata}${
-            nextToken ? `&startToken=${nextToken}` : ""
-          }`;
+          const url = `${baseURL}?contractAddress=${address}&withMetadata=${withMetadata}${nextToken ? `&startToken=${nextToken}` : ""
+            }`;
 
           const response = await axios.get(url);
           allNfts = [...allNfts, ...response.data.nfts];
           nextToken = response.data.nextToken;
         } while (nextToken);
+
+        // Fetch categories from Supabase
+        const { data: categoryData, error } = await supabase
+          .from('nft_categories')
+          .select('token_id, categories');
+
+        if (error) {
+          console.error('Error fetching categories:', error);
+        } else {
+          // Create a map of token_id to categories
+          const categoryMap = new Map(categoryData.map(item => [item.token_id, item.categories]));
+
+          // Merge NFT data with categories
+          allNfts = allNfts.map(nft => ({
+            ...nft,
+            categories: categoryMap.get(parseInt(nft.id.tokenId)) || getCategories(nft.metadata.attributes)
+          }));
+        }
 
         setNfts(allNfts);
         setIsLoading(false);
@@ -78,11 +98,27 @@ const Dashboard = () => {
   };
 
   const getCategories = (attributes) => {
-    if (!attributes) return "N/A";
+    if (!attributes) return [];
     return attributes
       .filter(attr => attr.value === "Yes")
-      .map(attr => attr.trait_type)
-      .join(", ");
+      .map(attr => attr.trait_type);
+  };
+
+  const formatCategories = (categories) => {
+    if (Array.isArray(categories)) {
+      return categories.join(', ');
+    } else if (typeof categories === 'string') {
+      // If it's a string, it might be a stringified array
+      try {
+        const parsedCategories = JSON.parse(categories);
+        if (Array.isArray(parsedCategories)) {
+          return parsedCategories.join(', ');
+        }
+      } catch (e) {
+        // If parsing fails, it's probably already a comma-separated string
+      }
+    }
+    return categories || 'N/A';
   };
 
   return (
@@ -137,7 +173,7 @@ const Dashboard = () => {
                         </div>
                       )}
                     </td>
-                    <td>{getCategories(nft.metadata.attributes)}</td>
+                    <td>{formatCategories(nft.categories)}</td>
                     <td>
                       <a
                         href={formatIpfsLink(nft.media[0].gateway)}
@@ -178,9 +214,8 @@ const Pagination = ({ nftsPerPage, totalNfts, paginate, currentPage }) => {
           <li key={number} className={styles.pageItem}>
             <button
               onClick={() => paginate(number)}
-              className={`${styles.pageLink} ${
-                currentPage === number ? styles.activePageLink : ""
-              }`}
+              className={`${styles.pageLink} ${currentPage === number ? styles.activePageLink : ""
+                }`}
             >
               {number}
             </button>
