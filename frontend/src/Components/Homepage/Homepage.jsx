@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./Homepage.module.css";
+import RatingSystem from "../RatingSystem/RatingSystem"; 
 
 const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -8,21 +9,21 @@ const Homepage = () => {
 
   const complaintBoxes = {
     pinned: [
-      { name: "Jesse", link: "/jesse", title: "(Manager of Base)" },
-      { name: "Brian", link: "/brian", title: "(Manager of Coinbase)" },
-      { name: "TYBG", link: "/tybg", title: "(Based God)" },
+      { name: "Jesse", link: "/jesse", title: "(Manager of Base)", twitter: "jessepollak" },
+      { name: "Brian", link: "/brian", title: "(Manager of Coinbase)", twitter: "brian_armstrong" },
+      { name: "TYBG", link: "/tybg", title: "(Based God)", twitter: "tybasegod" },
     ],
     "ecosystem projects": [
-      { name: "Based Merch", link: "/basedmerch", title: "Store" },
-      { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)" },
-      { name: "PokPok", link: "/pokpok", title: "(Nibel.eth)" },
+      { name: "Based Merch", link: "/basedmerch", title: "Store", twitter: "basedmerchstore" },
+      { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)", twitter: "mykcryptodev" },
+      { name: "PokPok", link: "/pokpok", title: "(Nibel.eth)", twitter: "Nibel_eth" },
     ],
     communities: [
-      { name: "TYBG", link: "/tybg", title: "(Based God)" },
-      { name: "Boris", link: "/boris", title: "(Boris The Wizard)" },
+      { name: "TYBG", link: "/tybg", title: "(Based God)", twitter: "tybasegod" },
+      { name: "Boris", link: "/boris", title: "(Boris The Wizard)", twitter: "bwizofficial" },
     ],
     influencers: [
-      // Add influencer boxes here
+      // Add influencer boxes here with their Twitter handles
     ],
   };
 
@@ -38,10 +39,13 @@ const Homepage = () => {
 
   const renderBoxes = (boxes) => {
     return filterBoxes(boxes).map((box) => (
-      <Link key={box.name} to={box.link} className={styles.box}>
-        <div>Complain To {box.name}</div>
-        <div>{box.title}</div>
-      </Link>
+      <div key={box.name} className={styles.boxWrapper}>
+        <Link to={box.link} className={styles.box}>
+          <div>Complain To {box.name}</div>
+          <div>{box.title}</div>
+        </Link>
+        <RatingSystem boxName={box.name} twitterHandle={box.twitter} />
+      </div>
     ));
   };
 

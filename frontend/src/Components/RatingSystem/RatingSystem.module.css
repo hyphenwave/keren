@@ -1,0 +1,62 @@
+.ratingSystem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+  width: 70%;
+  padding: 0 0.5rem;
+}
+
+.ratingButton {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.ratingButton:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ratingButton.active {
+  color: #ffd700;
+}
+
+.ratingButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.icon {
+  font-size: 1.2rem;
+}
+
+.count {
+  font-size: 0.9rem;
+}
+
+.twitterButton {
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.twitterButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+  .ratingSystem {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+} 
