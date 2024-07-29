@@ -20,7 +20,7 @@ const Homepage = () => {
     ],
     communities: [
       { name: "TYBG", link: "/tybg", title: "(Based God)", twitter: "tybasegod" },
-      { name: "Boris", link: "/boris", title: "(Boris The Wizard)", twitter: "bwizofficial" },
+      // { name: "Boris", link: "/boris", title: "(Boris The Wizard)", twitter: "bwizofficial" },
     ],
     influencers: [
       // Add influencer boxes here with their Twitter handles

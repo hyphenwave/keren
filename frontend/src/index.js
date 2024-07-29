@@ -82,7 +82,7 @@ root.render(
             }
           />
 
-          <Route
+          {/* <Route
             path="/boris"
             element={
               <div className="App">
@@ -91,7 +91,7 @@ root.render(
                 <Footer />
               </div>
             }
-          />
+          /> */}
 
 <Route
             path="/tybg"
