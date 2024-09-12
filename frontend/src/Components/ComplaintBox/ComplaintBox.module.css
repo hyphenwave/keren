@@ -1,0 +1,278 @@
+@font-face {
+  font-family: "tomhand";
+  src: url("/public/tomhand.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "sharkformal";
+  src: url("/public/sharkformalfunnyness.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.testnetBanner {
+  background-color: #ffff00;
+  color: #000000;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 0rem;
+  background-color: #fdfcf8;
+  text-align: center;
+  position: relative;
+}
+
+.heading {
+  font-size: 2rem;
+  font-family: "sharkformal", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.heading a {
+  animation: pulsate 1.5s infinite;
+}
+
+.heading a:link,
+.heading a:visited,
+.heading a:active {
+  color: black;
+}
+
+.description {
+  font-size: 1.3rem;
+  font-family: "sharkformal", sans-serif;
+  padding: 0 6rem;
+  margin-bottom: 0.5rem;
+}
+
+.form {
+  width: 15rem;
+  margin: 0 auto;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+
+.label {
+  font-size: 1rem;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: 100;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.textarea {
+  height: 100px;
+  resize: none;
+}
+
+.button {
+  font-family: "Helvetica Neue", sans-serif;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #9026a6;
+  color: #fdfcf8;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  border: 1px solid #9026a6;
+  transition: all 0.3s ease-in;
+}
+
+.button:hover {
+  background-color: #fdfcf8;
+  color: #9026a6;
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+}
+
+.relatedToSection {
+  margin-bottom: 20px;
+}
+
+.relatedToText {
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.checkboxGroup {
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  text-wrap: nowrap;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 4px;
+  margin-right: 5px;
+}
+
+.checkboxLabel:hover .checkbox ~ .checkmark {
+  background-color: #ccc;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkmark {
+  background-color: #a952b8;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.checkboxLabel .checkbox:checked ~ .checkmark:after {
+  display: block;
+}
+
+.checkboxLabel .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.characterCounter {
+  margin-top: 5px;
+  margin-left: auto;
+  font-size: 10px;
+  color: #888;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.kerenImage {
+  position: absolute;
+  top: -110px;
+  left: 80px;
+  width: 100px;
+  height: auto;
+}
+
+@media screen and (max-width: 1200px) {
+  .description {
+    padding: 0 3rem;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .heading {
+    font-size: 1.7rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .container {
+    padding: 2rem 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 0.8rem;
+  }
+  .checkboxLabel {
+    font-size: 12px;
+    margin-bottom: 18px;
+  }
+
+  .kerenImage {
+    top: 210px;
+    left: -60px;
+    transform: rotate(60deg);
+    animation: slideIn 1.5s ease-in;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .formGroup {
+    margin-bottom: 1rem;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    left: -100px;
+  }
+  100% {
+    left: -60px;
+  }
+}
+
+@keyframes pulsate {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}

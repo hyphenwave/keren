@@ -1,0 +1,28 @@
+.c-complaint_body {
+overflow: hidden;
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+}
+
+
+.navbar-btm {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.navbar-btm.active {
+  max-height: 500px; /* Adjust this value based on the content size */
+}
+
+
+input {
+  border: none;
+  outline: none; /* Removes focus outline (if you want this too) */
+  box-shadow: none; /* Removes any potential shadow */
+}
+
+.navbar-menu{
+  cursor: pointer;
+}
