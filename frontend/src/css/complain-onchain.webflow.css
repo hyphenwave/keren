@@ -15,6 +15,9 @@
   --green: #04f904;
   --grey: #f4f0f4;
   --fg: black;
+  --btn--primary: #320132;
+  --text--body: #5e555e;
+  --pill-bg: #f7f3f7;
 }
 
 .w-layout-vflex {
@@ -291,6 +294,15 @@ h3 {
   position: relative;
 }
 
+.avatar-initals.cc-full {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.avatar-initals.cc-32 {
+  font-size: 12.8px;
+}
+
 .c-avatar-v2 {
   border: 1px solid var(--line);
   color: var(--text--full);
@@ -307,6 +319,17 @@ h3 {
   overflow: hidden;
 }
 
+.c-avatar-v2.cc-full {
+  width: 100%;
+  height: 100%;
+}
+
+.c-avatar-v2.cc-32 {
+  border-width: .4px;
+  width: 32px;
+  height: 32px;
+}
+
 .v2-avatar-ellipse-1 {
   background-color: var(--blue);
   filter: blur(20px);
@@ -318,12 +341,18 @@ h3 {
   left: 45%;
 }
 
+.v2-avatar-ellipse-1.cc-32 {
+  filter: blur(8px);
+  width: 9.6px;
+  height: 9.6px;
+}
+
 .v2-avatar-ellipse-2 {
   background-color: var(--orange);
-  filter: blur(20px);
+  filter: blur(8px);
   border-radius: 24px;
-  width: 24px;
-  height: 24px;
+  width: 9.6px;
+  height: 9.6px;
   position: absolute;
   top: 45%;
   left: 10%;
@@ -331,10 +360,10 @@ h3 {
 
 .v2-avatar-ellipse-3 {
   background-color: var(--yellow);
-  filter: blur(20px);
+  filter: blur(8px);
   border-radius: 24px;
-  width: 24px;
-  height: 24px;
+  width: 9.6px;
+  height: 9.6px;
   position: absolute;
   top: 60%;
   right: 16%;
@@ -559,6 +588,11 @@ h3 {
   justify-content: space-between;
   width: 100%;
   display: flex;
+  position: relative;
+}
+
+.page-header.cc-complain {
+  justify-content: center;
 }
 
 .c-pagination {
@@ -698,11 +732,363 @@ h3 {
   background-color: var(--pink--3);
   color: var(--text--full);
   text-align: center;
+  white-space: nowrap;
   border-radius: 50vw;
+  flex: none;
   justify-content: center;
   align-items: center;
   height: 44px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
   font-weight: 500;
+  line-height: 20px;
+  transition: all .2s;
+  display: flex;
+}
+
+.btn:hover {
+  transform: scale(1.04);
+}
+
+.btn.cc-ghost {
+  border-color: var(--line);
+  background-color: var(--bg);
+}
+
+.btn.cc-ghost.cc-stretch {
+  flex: 1;
+}
+
+.btn.cc-primary {
+  background-color: var(--btn--primary);
+  color: var(--bg);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.btn.cc-primary.cc-248, .btn.cc-primary.cc-term-pri {
+  width: 100%;
+  max-width: 248px;
+}
+
+.btn.cc-gray {
+  border-color: var(--line);
+  background-color: var(--bg);
+}
+
+.c-back_btn {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px 8px 8px;
+  display: flex;
+}
+
+.c-back {
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  inset: 0% auto auto 0%;
+}
+
+.c-complaint_intro {
+  color: var(--text--body);
+  text-align: center;
+  text-wrap: balance;
+  max-width: 440px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.c-complaint_container {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  grid-template: "container"
+  / 1fr;
+  max-width: 936px;
+  height: 749px;
+  margin-top: 24px;
+  display: grid;
+  position: relative;
+}
+
+.c-complaint_slip {
+  z-index: 1;
+  border: 1px solid var(--line);
+  background-color: var(--bg);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  width: 480px;
+  height: 448px;
+  padding: 16px;
+}
+
+.c-slip_header {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.c-slip_avatar {
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  position: relative;
+}
+
+.c-slip_title {
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+  color: var(--text--body);
+  flex-flow: column;
+  display: flex;
+}
+
+.c-slip_receipient {
+  color: var(--text--full);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.hor-divider {
+  background-color: var(--line);
+  width: 100%;
+  height: 1px;
+}
+
+.c-slip_body {
+  margin-top: 16px;
+}
+
+.cc-complaint_box {
+  width: 936px;
+  height: 376px;
+}
+
+.box-image {
+  box-sizing: border-box;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+
+.c-slip_empty {
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  text-align: center;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 344px;
+  font-family: Glitch, sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  display: flex;
+}
+
+.c-slip_btns {
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+  flex-flow: column;
+  width: 248px;
+  display: flex;
+}
+
+.c-slip_form {
+  grid-column-gap: 20px;
+  grid-row-gap: 20px;
+  text-align: center;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 344px;
+  display: flex;
+}
+
+.c-slip_related {
+  color: var(--text--body);
+  text-align: left;
+}
+
+.c-related_pill {
+  background-color: var(--pill-bg);
+  color: var(--text--full);
+  border-radius: 100px;
+  padding: 6px 12px;
+  transition: all .2s;
+}
+
+.c-related_pill:hover {
+  background-color: var(--pink--5);
+  transform: scale(1.04);
+}
+
+.c-related_group {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  flex-flow: wrap;
+  margin-top: 8px;
+  display: flex;
+}
+
+.c-slip_message {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  text-align: left;
+  grid-template: "input-title"
+                 "."
+                 / 1fr;
+  grid-auto-columns: 1fr;
+  width: 100%;
+  display: grid;
+}
+
+.c-input {
+  border: 1px solid var(--line);
+  color: var(--text--placeholder);
+  border-radius: 12px;
+  height: 96px;
+  padding: 12px;
+}
+
+.c-input_max {
+  font-size: 12px;
+}
+
+.modal-page {
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.nft-details {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  border-radius: 24px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr 1.56fr;
+  grid-auto-columns: 1fr;
+  width: 560px;
+  padding: 16px;
+  display: grid;
+  position: relative;
+  box-shadow: 0 2px 5px #0003;
+}
+
+.c-nft_img {
+  border-radius: 12px;
+  width: 200px;
+  height: 282px;
+  overflow: hidden;
+}
+
+.c-nft_details {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  color: var(--text--body);
+  flex-flow: column;
+  display: flex;
+}
+
+.c-detail_group {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  flex-flow: column;
+  display: flex;
+}
+
+.c-detail_title {
+  color: var(--text--full);
+  font-family: Glitch, sans-serif;
+  line-height: 18px;
+}
+
+.btn-icon {
+  border-radius: 24px;
+  width: 24px;
+  height: 24px;
+  transition: all .15s;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.btn-icon:hover {
+  transform: scale(1.1);
+}
+
+.terms-modal {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  border-radius: 24px;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr;
+  grid-auto-columns: 1fr;
+  width: 480px;
+  padding: 16px;
+  display: grid;
+  position: relative;
+  box-shadow: 0 2px 5px #0003;
+}
+
+.c-terms_title {
+  text-align: center;
+  font-family: Glitch, sans-serif;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.terms-icon {
+  border-radius: 24px;
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.c-terms_details {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  color: var(--text--body);
+  flex-flow: column;
+  display: flex;
+}
+
+.text-disclaimer {
+  font-size: 12px;
+}
+
+.c-checkbox {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  align-items: center;
+  display: flex;
+}
+
+.c-checkbox_tick {
+  background-color: var(--pink--full);
+  border-radius: 6px;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  display: flex;
+}
+
+.c-terms_btns {
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+  flex-flow: wrap;
   display: flex;
 }
 
@@ -711,8 +1097,37 @@ h3 {
     font-size: 64px;
   }
 
+  .content.cc-complain {
+    padding-left: 0%;
+    padding-right: 0%;
+    overflow: hidden;
+  }
+
   .tab {
     white-space: nowrap;
+  }
+
+  .c-back {
+    left: 5%;
+  }
+
+  .c-complaint_container {
+    justify-content: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .c-complaint_slip {
+    border-radius: 24px;
+    height: auto;
+  }
+
+  .cc-complaint_box {
+    display: none;
+  }
+
+  .c-slip_form {
+    height: auto;
   }
 }
 
@@ -758,6 +1173,11 @@ h3 {
     align-items: center;
   }
 
+  .page-header.cc-complain {
+    justify-content: center;
+    align-items: flex-start;
+  }
+
   .c-pagination, .c-sort {
     order: 1;
     justify-content: center;
@@ -768,9 +1188,58 @@ h3 {
     grid-template-rows: auto auto auto;
     grid-template-columns: 1fr;
   }
+
+  .btn.cc-ghost {
+    transition: all .15s;
+  }
+
+  .btn.cc-ghost:hover {
+    background-color: var(--line);
+  }
+
+  .btn.cc-primary.cc-term-pri {
+    max-width: none;
+  }
+
+  .c-back {
+    justify-content: center;
+    align-items: center;
+    position: static;
+  }
+
+  .c-complaint_intro {
+    text-align: left;
+    text-wrap: wrap;
+    max-width: none;
+  }
+
+  .nft-details {
+    grid-template-columns: 1fr;
+    width: 80%;
+    max-width: 440px;
+  }
+
+  .c-nft_img {
+    display: none;
+  }
+
+  .terms-modal {
+    grid-template-columns: 1fr;
+    width: 80%;
+    max-width: 440px;
+  }
 }
 
 @media screen and (max-width: 479px) {
+  h2 {
+    font-size: 32px;
+  }
+
+  .content {
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
+  }
+
   .c-complain_about {
     margin-top: 80px;
   }
@@ -788,6 +1257,56 @@ h3 {
     width: 100%;
     overflow: auto;
   }
+
+  .c-complaint_slip {
+    width: 100%;
+  }
+
+  .c-related_pill {
+    font-size: 13px;
+  }
+
+  .nft-details, .terms-modal {
+    max-width: 320px;
+  }
+
+  .c-terms_title {
+    max-width: 184px;
+  }
+}
+
+#w-node-_6a4cba5e-ab3e-6b94-3e8e-c03fcb434850-3884ff87 {
+  grid-area: container;
+  place-self: start center;
+}
+
+#w-node-e491cd5e-f8c8-14b5-3319-53c4438bd969-3884ff87 {
+  grid-area: container;
+  align-self: end;
+}
+
+#w-node-e55a0f71-e52b-0285-3ba5-abce5d837bba-3884ff87 {
+  grid-area: container;
+  place-self: start center;
+}
+
+#w-node-cb32081e-d34d-2ed1-2457-0a51ae0ba7c0-3884ff87 {
+  grid-area: input-title;
+  justify-self: start;
+}
+
+#w-node-_3edf9059-e872-3b7e-8c56-81651322444b-3884ff87 {
+  grid-area: input-title;
+  justify-self: end;
+}
+
+#w-node-e55a0f71-e52b-0285-3ba5-abce5d837bce-3884ff87 {
+  grid-area: container;
+  align-self: end;
+}
+
+#w-node-_25cc59d3-baab-d442-68ee-851221446627-e1b6b8e8 {
+  justify-self: center;
 }
 
 
@@ -798,4 +1317,3 @@ h3 {
   font-style: normal;
   font-display: swap;
 }
-

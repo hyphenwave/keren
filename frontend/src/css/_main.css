@@ -26,3 +26,8 @@ input {
 .navbar-menu{
   cursor: pointer;
 }
+
+.c-related_pill.selected {
+  background-color: #0052ff;
+  color: white;
+}

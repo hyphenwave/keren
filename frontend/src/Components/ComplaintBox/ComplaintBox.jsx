@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./ComplaintBox.module.css";
-import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
-import ConsentPopup from "../ConsentPopup/ConsentPopup";
-import Swal from "sweetalert2";
+// import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
+// import ConsentPopup from "../ConsentPopup/ConsentPopup";
+import { toast, Toaster } from 'sonner';
+import { Link } from 'react-router-dom';
+// import Swal from "sweetalert2";
 import { TokenAddress } from "../../Helper/helper";
 import {
 	pinFileToIPFS,
@@ -15,6 +17,7 @@ import { useAccount, useWriteContract } from 'wagmi';
 import { waitForTransactionReceipt, readContract } from "@wagmi/core";
 import abi from "./abi.json";
 import { BlackCreateWalletButton } from '../BlackCreateWalletButton/BlackCreateWalletButton';
+// import { initials } from "ts-utils";
 // const ethersConfig = defaultConfig({ metadata });
 
 
@@ -31,7 +34,9 @@ const ComplaintBox = ({ recipient }) => {
 	const { writeContractAsync } = useWriteContract()
 
 	const recipientInfo = {
-		Jesse: {
+		jesse: {
+			name: "jesse",
+			initials: "j",
 			address: "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
 			backgroundImage: "/card.png",
 			textColor: "black",
@@ -51,7 +56,9 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
-		Brian: {
+		brian: {
+			name: "brian",
+			initials: "b",
 			address: "0x5b76f5B8fc9D700624F78208132f91AD4e61a1f0",
 			backgroundImage: "/card_brian.png",
 			textColor: "white",
@@ -72,8 +79,9 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
-
-		BasedMerch: {
+		basedmerch: {
+			name: "Based Merch",
+			initials: "BM",
 			address: "0x26A3737261178eed0E66a70967F2DBDd9798afb0",
 			backgroundImage: "/card_merch.png",
 			textColor: "white",
@@ -92,8 +100,9 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
-
-		Mykcryptodev: {
+		mykcryptodev: {
+				name: "Mykcryptodev",
+			initials: "MCD",
 			address: "0x5079EC85c3c8F8E932Bd011B669b77d703DEEea7",
 			backgroundImage: "/card_myk.png",
 			textColor: "white",
@@ -127,7 +136,9 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
-		Boris: {
+		boris: {
+					name: "Boris",
+			initials: "B",
 			address: "0x4381C13BC325349a5214B463Eb85DD660A9629B5",
 			backgroundImage: "/card_boris.png",
 			textColor: "black",
@@ -144,7 +155,9 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
-		TYBG: {
+		tybg: {
+		name: "TYBG",
+			initials: "TY",
 			address: "0x2270a4ca23614eCE42905045b1fF2CB2a396c4Ff",
 			backgroundImage: "/card_tybg.png",
 			textColor: "black",
@@ -161,7 +174,9 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
-		PokPok: {
+		pokpok: {
+			name: "Pok Pok",
+			initials: "PP",
 			address: "0xC2ca7C647c7959F14700d8fD5B6219b44Ca56930",
 			backgroundImage: "/card_pok.png",
 			textColor: "black",
@@ -179,6 +194,16 @@ const ComplaintBox = ({ recipient }) => {
 			),
 		},
 	};
+
+	  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleOptionToggle = (optionName) => {
+    setSelectedOptions(prevSelected => 
+      prevSelected.includes(optionName)
+        ? prevSelected.filter(name => name !== optionName)
+        : [...prevSelected, optionName]
+    );
+  };
 
 	const getCheckboxOptions = (recipient) => {
 		const commonOptions = [
@@ -288,225 +313,178 @@ const ComplaintBox = ({ recipient }) => {
 		setShowConsentPopup(false);
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
-		if (complaint.length > 500) {
-			Swal.fire({
-				title: "Character Limit Exceeded",
-				text: "Please limit your complaint to 500 characters.",
-				icon: "warning",
-			});
-			return;
-		}
+    if (complaint.length > 500) {
+      toast.error("Please limit your complaint to 500 characters.");
+      return;
+    }
 
-		try {
-			setIsLoading(true);
+    try {
+      setIsLoading(true);
+      toast.loading("Submitting complaint...");
 
-			const totalSupply = await readContract(config, {
-				abi,
-				address: TokenAddress,
-				functionName: 'totalSupply',
-			})
-			const tokenId = (Number(totalSupply) + 1).toString();
+      const totalSupply = await readContract(config, {
+        abi,
+        address: TokenAddress,
+        functionName: 'totalSupply',
+      });
+      const tokenId = (Number(totalSupply) + 1).toString();
 
-			console.log("total supply", Number(totalSupply))
+      const randomString = generateRandomString();
 
-			// Generate a random string for the file names
-			const randomString = generateRandomString();
+      const imageBlob = await generateComplaintImage(complaint, address);
+      const imageFileName = `card-${randomString}.png`;
+      const imageHash = await pinFileToIPFS(imageBlob, imageFileName);
 
-			// Generate the complaint image with the user's complaint and address
-			const imageBlob = await generateComplaintImage(complaint, address);
-			const imageFileName = `card-${randomString}.png`;
-			const imageHash = await pinFileToIPFS(imageBlob, imageFileName);
+      const metadata = {
+        name: `Complaint NFT #${tokenId}`,
+        description: complaint,
+        external_url: "https://www.basedkeren.com/",
+        image: `ipfs://${imageHash}`,
+        attributes: selectedOptions.map(option => ({
+          trait_type: option,
+          value: "Yes",
+        })),
+      };
 
-			// Create the metadata object with the correct IPFS gateway URL and token ID
-			const metadata = {
-				name: `Complaint NFT #${tokenId}`,
-				description: complaint,
-				external_url: "https://www.basedkeren.com/",
-				image: `ipfs://${imageHash}`,
-				attributes: checkboxOptions.map(option => ({
-					trait_type: option.label,
-					value: checkboxes[option.name] ? "Yes" : "No",
-				})),
-			};
+      const metadataFileName = `metadata-${randomString}.json`;
+      const metadataHash = await pinJSONToIPFS(metadata, metadataFileName);
+
+      const hash = await writeContractAsync({
+        address: TokenAddress,
+        abi,
+        functionName: "safeMint",
+        args: [address, `ipfs://${metadataHash}`]
+      });
+
+      const mintReceipt = await waitForTransactionReceipt(config, {
+        hash: hash,
+      });
+
+      if (mintReceipt.logs && mintReceipt.logs.length > 0) {
+        const tokenIdHex = mintReceipt.logs[0].topics[3];
+        const tokenIdDecimal = parseInt(tokenIdHex, 16);
+        const tokenIdString = tokenIdDecimal.toString();
+
+        await writeContractAsync({
+          address: TokenAddress,
+          abi,
+          functionName: "safeTransferFrom",
+          args: [address, recipientInfo[recipient].address, tokenIdString]
+        });
+
+        toast.success("Complaint submitted and NFT transferred successfully");
+        setComplaint("");
+        setSelectedOptions([]);
+      } else {
+        toast.warning("Complaint submitted, but token ID not found. The complaint was submitted successfully, but the token ID could not be retrieved.");
+      }
+    } catch (error) {
+      console.error("Error submitting complaint:", error);
+      toast.error("An error occurred while submitting the complaint. Please try again.");
+    } finally {
+      setIsLoading(false);
+      toast.dismiss();
+    }
+  };
 
 
-			// Pin the metadata to IPFS
-			const metadataFileName = `metadata-${randomString}.json`;
-			const metadataHash = await pinJSONToIPFS(metadata, metadataFileName);
-
-			console.log("sending tx")
-			const hash = await writeContractAsync({
-				address: TokenAddress,
-				abi,
-				functionName: "safeMint",
-				args: [address, `ipfs://${metadataHash}`]
-			})
-
-			console.log("sent tx")
-
-			const mintReceipt = await waitForTransactionReceipt(config, {
-				hash: hash,
-			})
-
-			// Log the mint transaction receipt to check for emitted events
-
-			// Check if the transaction receipt has logs
-			if (mintReceipt.logs && mintReceipt.logs.length > 0) {
-				// Retrieve the token ID from the first log entry (Transfer event)
-				const tokenIdHex = mintReceipt.logs[0].topics[3];
-
-				// Convert the tokenId from hexadecimal to decimal
-				const tokenIdDecimal = parseInt(tokenIdHex, 16);
-
-				// Convert the tokenId to a string
-				const tokenIdString = tokenIdDecimal.toString();
-
-				await writeContractAsync({
-					address: TokenAddress,
-					abi,
-					functionName: "safeTransferFrom",
-					args: [address, recipientInfo[recipient].address, tokenIdString]
-				})
-
-				Swal.fire({
-					title: "Complaint submitted and NFT transferred successfully:",
-					icon: "success",
-				});
-				setComplaint("");
-			} else {
-				console.warn("No logs found in the mint transaction receipt");
-				Swal.fire({
-					title: "Complaint submitted, but token ID not found:",
-					text: "The complaint was submitted successfully, but the token ID could not be retrieved.",
-					icon: "warning",
-				});
-			}
-		} catch (error) {
-			console.log(error)
-			console.error("Error submitting complaint:", error);
-			Swal.fire({
-				title: "Error submitting complaint:",
-				text: "An error occurred while submitting the complaint. Please try again.",
-				icon: "error",
-			});
-		} finally {
-			setIsLoading(false); // Set loading state to false
-		}
-	};
-
-	return (
-		<div className={styles.container}>
-			{isTestnet && (
-				<div className={styles.testnetBanner}>
-					You are currently on the Testnet
-				</div>
-			)}
-			<img
-				src="/keren_sit.png"
-				alt="Keren sitting"
-				className={styles.kerenImage}
-			/>
-
-			{showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
-			{isLoading && <LoadingOverlay />}
-			<h1 className={styles.heading}>
-				Base Complaint Box - Complain to{" "}
-				<a
-					href={
-						recipient === "BasedMerch"
-							? "https://shop.slice.so/store/508"
-							: recipient === "Mykcryptodev"
-								? "https://x.com/mykcryptodev"
-								: getRecipientWebsite(recipient)
-					}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					{recipient === "BasedMerch"
-						? "Based Merch Store"
-						: recipient === "Mykcryptodev"
-							? "Base Token Store"
-							: recipient === "Boris"
-								? "Boris The Wizard"
-								: recipient === "TYBG"
-									? "Based God"
-									: recipient}
-				</a>
-			</h1>
-			{recipientInfo[recipient].description}
-			<form onSubmit={handleSubmit} className={styles.form}>
-				<div className={styles.formGroup}>
-					<label htmlFor="complaint" className={styles.label}>
-						Complain here *
-					</label>
-					<textarea
-						id="complaint"
-						value={complaint}
-						onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
-						className={styles.textarea}
-						required
-					/>
-					<div className={styles.characterCounter}>
-						{complaint.length}/500 characters
-					</div>
-				</div>
-				<div className={styles.relatedToSection}>
-					<p className={styles.relatedToText}>Related to:</p>
-					<div className={styles.checkboxGroup}>
-						{checkboxOptions.map((option) => (
-							<label key={option.name} className={styles.checkboxLabel}>
-								<input
-									type="checkbox"
-									name={option.name}
-									checked={checkboxes[option.name]}
-									onChange={handleCheckboxChange}
-									className={styles.checkbox}
-								/>
-								<span className={styles.checkmark}></span>
-								{option.label}
-							</label>
-						))}
-					</div>
-				</div>
-				<canvas
-					ref={canvasRef}
-					width="1414"
-					height="2000"
-					style={{ display: "none" }}
-				/>
-				<ConnectKitProvider>
-					<ConnectKitButton.Custom>
-						{({ isConnected, show }) => {
-							if (isConnected) {
-								return (<button type="submit" className={styles.button}>
-									Send Complaint
-								</button>)
-							}
-
-							return (
-								<div className={styles.buttonBox}>
-									<BlackCreateWalletButton width={200} height={48} />
-
-									<button
-										type="button"
-										onClick={() => show()}
-										className={styles.button}
-									>
-										Connect Wallet
-									</button>
-								</div>
-							)
-						}}
-					</ConnectKitButton.Custom>
-				</ConnectKitProvider>
-			</form>
-		</div >
-
-	);
+return (
+    <div className="content"> 
+		<Toaster position="top-center" />
+      <div className="page-header cc-complain">
+        <div className="c-back">
+          <div className="c-back_btn">
+         <Link to="/" style={{ textDecoration: 'none' }}> 
+         	   <img src="/images/left-chevron.svg" alt="" className="icon-20" />
+	            <div>Back</div>
+         </Link>
+          </div>
+        </div>
+        <h2>Complain to {recipientInfo[recipient].name}</h2>
+      </div>
+      <div className="c-complaint_intro">
+        Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain.<br /><br />
+        If you want something done right, you've got to do it onchain! Let's make Base a better place, together.
+      </div>
+      <div className="c-complaint_container">
+        <div className="c-complaint_slip" id="w-node-_6a4cba5e-ab3e-6b94-3e8e-c03fcb434850-3884ff87">
+          <div className="c-slip_header">
+            <div className="c-slip_avatar">
+              <div className="c-avatar-v2 cc-32">
+                <div className="avatar-initals cc-32">{recipientInfo[recipient].initials}</div>
+                <div className="v2-avatar-ellipse-1 cc-32"></div>
+                <div className="v2-avatar-ellipse-3"></div>
+                <div className="v2-avatar-ellipse-2"></div>
+              </div>
+            </div>
+            <div className="c-slip_title">
+              <div className="c-slip_receipient">{recipientInfo[recipient].name}</div>
+              <div>{recipientInfo[recipient].title}</div>
+            </div>
+          </div>
+          <div className="hor-divider"></div>
+          <div className="c-slip_body">
+            {address ? (
+              <form onSubmit={handleSubmit} className="c-slip_form">
+                <div className="c-slip_related">
+                  <div>Related to</div>
+                  <div className="c-related_group">
+                    {checkboxOptions.map((option) => (
+                       <button
+                        key={option.name}
+                        type="button"
+                        className={`c-related_pill ${selectedOptions.includes(option.name) ? 'selected' : ''}`}
+                        onClick={() => handleOptionToggle(option.name)}
+                      >
+                        {option.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="c-slip_message">
+                  <div>Complaint</div>
+                  <div className="c-input_max">{complaint.length}/500</div>
+                  <textarea
+                    value={complaint}
+                    onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
+                    className="c-input"
+                    placeholder="Type complaint"
+                    required
+                  />
+                </div>
+ 								<button type="submit" className="btn cc-primary cc-248" disabled={isLoading}>
+                  {isLoading ? 'Submitting...' : 'Submit Complaint'}
+                </button>
+              </form>
+            ) : (
+              <div className="c-slip_empty">
+                <div>Connect your wallet to <br />complain to {recipientInfo[recipient].name}</div>
+                <div className="c-slip_btns">
+                  <ConnectKitProvider>
+                    <ConnectKitButton.Custom>
+                      {({ show }) => (
+                        <button onClick={show} className="btn">Connect Wallet</button>
+                      )}
+                    </ConnectKitButton.Custom>
+                  </ConnectKitProvider>
+                  <BlackCreateWalletButton width={200} height={48} />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="cc-complaint_box" id="w-node-e491cd5e-f8c8-14b5-3319-53c4438bd969-3884ff87">
+          <img src="images/complaint-box.png" alt="Complaint Box" className="box-image" />
+        </div>
+      </div>
+      <canvas ref={canvasRef} style={{ display: "none" }} />
+    </div>
+  );
 };
+
 
 export default ComplaintBox;
 

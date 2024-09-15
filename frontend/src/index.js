@@ -52,8 +52,7 @@ root.render(
             path="/jesse"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
-                <ComplaintBox recipient="Jesse" />
+                <ComplaintBox recipient="jesse" />
                 <Footer />
               </div>
             }
@@ -62,8 +61,7 @@ root.render(
             path="/brian"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
-                <ComplaintBox recipient="Brian" />
+                <ComplaintBox recipient="brian" />
                 <Footer />
               </div>
             }
@@ -73,8 +71,8 @@ root.render(
             path="/basedmerch"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
-                <ComplaintBox recipient="BasedMerch" />
+              
+                <ComplaintBox recipient="basedmerch" />
                 <Footer />
               </div>
             }
@@ -84,8 +82,7 @@ root.render(
             path="/mykcryptodev"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
-                <ComplaintBox recipient="Mykcryptodev" />
+                <ComplaintBox recipient="mykcryptodev" />
                 <Footer />
               </div>
             }
@@ -95,7 +92,6 @@ root.render(
             path="/boris"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
                 <ComplaintBox recipient="Boris" />
                 <Footer />
               </div>
@@ -106,8 +102,7 @@ root.render(
             path="/tybg"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
-                <ComplaintBox recipient="TYBG" />
+                <ComplaintBox recipient="tybg" />
                 <Footer />
               </div>
             }
@@ -117,7 +112,7 @@ root.render(
             path="/pokpok"
             element={
               <div className="App">
-                <img className="titleImage" src="title.png" alt="Title" />
+              
                 <ComplaintBox recipient="PokPok" />
                 <Footer />
               </div>
