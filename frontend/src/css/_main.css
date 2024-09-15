@@ -45,3 +45,14 @@ input {
   font-style: italic; /* Italic to differentiate */
 }
 
+
+
+.swiper{
+  width: 248px;
+}
+
+.swiper .swiper-slide{
+background-color: white;
+border-radius: 22px;
+border: 1px solid;
+}

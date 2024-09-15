@@ -4,8 +4,12 @@ import React, { useState } from "react";
 import { motion } from 'framer-motion';
 import RatingSystem from "../RatingSystem/RatingSystem";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import { EffectCards } from "swiper/modules";
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+
 
 const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -195,6 +199,7 @@ const Homepage = () => {
               </div>
   
               <Swiper
+                effect={'cards'}
                 grabCursor={true}
                 modules={[EffectCards]}
                 className="mySwiper"
