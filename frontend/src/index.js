@@ -113,7 +113,7 @@ root.render(
             element={
               <div className="App">
               
-                <ComplaintBox recipient="PokPok" />
+                <ComplaintBox recipient="pokpok" />
                 <Footer />
               </div>
             }
