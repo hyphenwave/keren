@@ -2,10 +2,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  // State to toggle visibility
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Function to handle toggle
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -20,7 +18,9 @@ const Navbar = () => {
           <div>Dashboard</div>
         </Link>
         <a href="#" className="navbar-page w-inline-block">
-          <div>Analytics</div>
+          <div>
+            Analytics <span className="coming-soon"> coming soon</span>
+          </div>
         </a>
         <a href="https://www.basedkeren.com/" className="navbar-page w-inline-block">
           <div>Keren Website</div>
@@ -32,7 +32,6 @@ const Navbar = () => {
         </a>
       </div>
 
-      {/* Add the 'active' class when the menu is open */}
       <div className={`navbar-btm ${isMenuOpen ? 'active' : ''}`}>
         <a href="https://t.me/kerenbase" className="navbar-extpage w-inline-block">
           <div>Telegram</div>

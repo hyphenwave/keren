@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import styles from "./ComplaintBox.module.css";
+import { motion } from 'framer-motion';
 // import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
-// import ConsentPopup from "../ConsentPopup/ConsentPopup";
+import ConsentPopup from "../ConsentPopup/ConsentPopup";
 import { toast, Toaster } from 'sonner';
 import { Link } from 'react-router-dom';
 // import Swal from "sweetalert2";
@@ -392,96 +393,116 @@ const handleSubmit = async (e) => {
 
 
 return (
-    <div className="content"> 
-		<Toaster position="top-center" />
-      <div className="page-header cc-complain">
-        <div className="c-back">
-          <div className="c-back_btn">
-         <Link to="/" style={{ textDecoration: 'none' }}> 
-         	   <img src="/images/left-chevron.svg" alt="" className="icon-20" />
-	            <div>Back</div>
-         </Link>
-          </div>
-        </div>
-        <h2>Complain to {recipientInfo[recipient].name}</h2>
-      </div>
-      <div className="c-complaint_intro">
-        Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain.<br /><br />
-        If you want something done right, you've got to do it onchain! Let's make Base a better place, together.
-      </div>
-      <div className="c-complaint_container">
-        <div className="c-complaint_slip" id="w-node-_6a4cba5e-ab3e-6b94-3e8e-c03fcb434850-3884ff87">
-          <div className="c-slip_header">
-            <div className="c-slip_avatar">
-              <div className="c-avatar-v2 cc-32">
-                <div className="avatar-initals cc-32">{recipientInfo[recipient].initials}</div>
-                <div className="v2-avatar-ellipse-1 cc-32"></div>
-                <div className="v2-avatar-ellipse-3"></div>
-                <div className="v2-avatar-ellipse-2"></div>
-              </div>
-            </div>
-            <div className="c-slip_title">
-              <div className="c-slip_receipient">{recipientInfo[recipient].name}</div>
-              <div>{recipientInfo[recipient].title}</div>
-            </div>
-          </div>
-          <div className="hor-divider"></div>
-          <div className="c-slip_body">
-            {address ? (
-              <form onSubmit={handleSubmit} className="c-slip_form">
-                <div className="c-slip_related">
-                  <div>Related to</div>
-                  <div className="c-related_group">
-                    {checkboxOptions.map((option) => (
-                       <button
-                        key={option.name}
-                        type="button"
-                        className={`c-related_pill ${selectedOptions.includes(option.name) ? 'selected' : ''}`}
-                        onClick={() => handleOptionToggle(option.name)}
-                      >
-                        {option.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                <div className="c-slip_message">
-                  <div>Complaint</div>
-                  <div className="c-input_max">{complaint.length}/500</div>
-                  <textarea
-                    value={complaint}
-                    onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
-                    className="c-input"
-                    placeholder="Type complaint"
-                    required
-                  />
-                </div>
- 								<button type="submit" className="btn cc-primary cc-248" disabled={isLoading}>
-                  {isLoading ? 'Submitting...' : 'Submit Complaint'}
-                </button>
-              </form>
-            ) : (
-              <div className="c-slip_empty">
-                <div>Connect your wallet to <br />complain to {recipientInfo[recipient].name}</div>
-                <div className="c-slip_btns">
-                  <ConnectKitProvider>
-                    <ConnectKitButton.Custom>
-                      {({ show }) => (
-                        <button onClick={show} className="btn">Connect Wallet</button>
-                      )}
-                    </ConnectKitButton.Custom>
-                  </ConnectKitProvider>
-                  <BlackCreateWalletButton width={200} height={48} />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="cc-complaint_box" id="w-node-e491cd5e-f8c8-14b5-3319-53c4438bd969-3884ff87">
-          <img src="images/complaint-box.png" alt="Complaint Box" className="box-image" />
+ <motion.div
+     initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+	    <div className="content"> 
+			<Toaster position="top-center" />
+				{showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
+			{/* conditionally render the rest of the page */}
+	{!showConsentPopup && (
+  <>
+    <div className="page-header cc-complain">
+      <div className="c-back">
+        <div className="c-back_btn">
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <img src="/images/left-chevron.svg" alt="" className="icon-20" />
+            <div>Back</div>
+          </Link>
         </div>
       </div>
-      <canvas ref={canvasRef} style={{ display: "none" }} />
+      <h2>Complain to {recipientInfo[recipient].name}</h2>
     </div>
+    <div className="c-complaint_intro">
+      Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain.
+      <br />
+      <br />
+      If you want something done right, you've got to do it onchain! Let's make Base a better place, together.
+    </div>
+    <div className="c-complaint_container">
+      <div className="c-complaint_slip" id="w-node-_6a4cba5e-ab3e-6b94-3e8e-c03fcb434850-3884ff87">
+        <div className="c-slip_header">
+          <div className="c-slip_avatar">
+            <div className="c-avatar-v2 cc-32">
+              <div className="avatar-initals cc-32">{recipientInfo[recipient].initials}</div>
+              <div className="v2-avatar-ellipse-1 cc-32"></div>
+              <div className="v2-avatar-ellipse-3"></div>
+              <div className="v2-avatar-ellipse-2"></div>
+            </div>
+          </div>
+          <div className="c-slip_title">
+            <div className="c-slip_receipient">{recipientInfo[recipient].name}</div>
+            <div>{recipientInfo[recipient].title}</div>
+          </div>
+        </div>
+        <div className="hor-divider"></div>
+        <div className="c-slip_body">
+          {address ? (
+            <form onSubmit={handleSubmit} className="c-slip_form">
+              <div className="c-slip_related">
+                <div>Related to</div>
+                <div className="c-related_group">
+                  {checkboxOptions.map((option) => (
+                    <button
+                      key={option.name}
+                      type="button"
+                      className={`c-related_pill ${selectedOptions.includes(option.name) ? 'selected' : ''}`}
+                      onClick={() => handleOptionToggle(option.name)}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="c-slip_message">
+                <div>Complaint</div>
+                <div className="c-input_max">{complaint.length}/500</div>
+                <textarea
+                  value={complaint}
+                  onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
+                  className="c-input"
+                  placeholder="Type complaint"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn cc-primary cc-248" disabled={isLoading}>
+                {isLoading ? 'Submitting...' : 'Submit Complaint'}
+              </button>
+            </form>
+          ) : (
+            <div className="c-slip_empty">
+              <div>
+                Connect your wallet to <br />
+                complain to {recipientInfo[recipient].name}
+              </div>
+              <div className="c-slip_btns">
+                <ConnectKitProvider>
+                  <ConnectKitButton.Custom>
+                    {({ show }) => (
+                      <button onClick={show} className="btn">
+                        Connect Wallet
+                      </button>
+                    )}
+                  </ConnectKitButton.Custom>
+                </ConnectKitProvider>
+                <BlackCreateWalletButton width={200} height={48} />
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="cc-complaint_box" id="w-node-e491cd5e-f8c8-14b5-3319-53c4438bd969-3884ff87">
+        <img src="images/complaint-box.png" alt="Complaint Box" className="box-image" />
+      </div>
+    </div>
+  </>
+)}
+
+	      <canvas ref={canvasRef} style={{ display: "none" }} />
+	    </div>
+</motion.div>
   );
 };
 
