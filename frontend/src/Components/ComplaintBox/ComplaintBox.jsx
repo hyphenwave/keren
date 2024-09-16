@@ -3,6 +3,8 @@ import styles from "./ComplaintBox.module.css";
 import { motion } from 'framer-motion';
 // import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 import ConsentPopup from "../ConsentPopup/ConsentPopup";
+import { useCallback } from 'react';
+import { useConnect } from 'wagmi';
 import { toast, Toaster } from 'sonner';
 import { Link } from 'react-router-dom';
 // import Swal from "sweetalert2";
@@ -483,18 +485,7 @@ return (
                 Connect your wallet to <br />
                 complain to {recipientInfo[recipient].name}
               </div>
-              <div className="c-slip_btns">
-                <ConnectKitProvider>
-                  <ConnectKitButton.Custom>
-                    {({ show }) => (
-                      <button onClick={show} className="btn">
-                        Connect Wallet
-                      </button>
-                    )}
-                  </ConnectKitButton.Custom>
-                </ConnectKitProvider>
-                <BlackCreateWalletButton width={200} height={48} />
-              </div>
+           <WalletButtons/>
             </div>
           )}
         </div>
@@ -511,6 +502,39 @@ return (
 </motion.div>
   );
 };
+
+
+
+const WalletButtons = () => {
+  const { connectors, connect } = useConnect();
+
+  const handleCreateWallet = useCallback(() => {
+    const coinbaseWalletConnector = connectors.find(
+      (connector) => connector.id === 'coinbaseWalletSDK'
+    );
+    if (coinbaseWalletConnector) {
+      connect({ connector: coinbaseWalletConnector });
+    }
+  }, [connectors, connect]);
+
+  return (
+    <div className="c-slip_btns">
+      <ConnectKitProvider>
+        <ConnectKitButton.Custom>
+          {({ show }) => (
+            <button onClick={show} className="btn">
+              Connect Wallet
+            </button>
+          )}
+        </ConnectKitButton.Custom>
+        <button onClick={handleCreateWallet} className="btn cc-ghost w-button">
+          Create Wallet
+        </button>
+      </ConnectKitProvider>
+    </div>
+  );
+};
+
 
 
 export default ComplaintBox;
