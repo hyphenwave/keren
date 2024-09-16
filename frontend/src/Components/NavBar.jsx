@@ -32,7 +32,7 @@ const Navbar = () => {
         </a>
       </div>
 
-      <div className={`navbar-btm ${isMenuOpen ? 'active' : ''}`}>
+      <div className={`navbar-btm ${isMenuOpen ? 'active' : 'hidden'}`}>
         <a href="https://t.me/kerenbase" className="navbar-extpage w-inline-block">
           <div>Telegram</div>
           <div className="icon-16">
