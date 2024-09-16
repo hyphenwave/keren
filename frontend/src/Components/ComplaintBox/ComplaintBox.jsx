@@ -37,7 +37,8 @@ const ComplaintBox = ({ recipient }) => {
 	const recipientInfo = {
 		jesse: {
 			name: "jesse",
-			initials: "j",
+			  title: "Manager of Base",
+			initials: "JE",
 			address: "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
 			backgroundImage: "/card.png",
 			textColor: "black",
@@ -59,7 +60,8 @@ const ComplaintBox = ({ recipient }) => {
 		},
 		brian: {
 			name: "brian",
-			initials: "b",
+			 title: "Manager of Coinbase",
+			initials: "BR",
 			address: "0x5b76f5B8fc9D700624F78208132f91AD4e61a1f0",
 			backgroundImage: "/card_brian.png",
 			textColor: "white",
@@ -102,8 +104,9 @@ const ComplaintBox = ({ recipient }) => {
 			),
 		},
 		mykcryptodev: {
-				name: "Mykcryptodev",
-			initials: "MCD",
+			name: "Base Token Store",
+		  initials: "BT",
+			title: "Mykcryptodev",
 			address: "0x5079EC85c3c8F8E932Bd011B669b77d703DEEea7",
 			backgroundImage: "/card_myk.png",
 			textColor: "white",
@@ -138,8 +141,9 @@ const ComplaintBox = ({ recipient }) => {
 			),
 		},
 		boris: {
-					name: "Boris",
-			initials: "B",
+			name: "Boris",
+			initials: "BR",
+			title: "Manager of Coinbase",
 			address: "0x4381C13BC325349a5214B463Eb85DD660A9629B5",
 			backgroundImage: "/card_boris.png",
 			textColor: "black",
@@ -159,6 +163,7 @@ const ComplaintBox = ({ recipient }) => {
 		tybg: {
 		name: "TYBG",
 			initials: "TY",
+			    title: "Based God",
 			address: "0x2270a4ca23614eCE42905045b1fF2CB2a396c4Ff",
 			backgroundImage: "/card_tybg.png",
 			textColor: "black",
@@ -178,6 +183,7 @@ const ComplaintBox = ({ recipient }) => {
 		pokpok: {
 			name: "Pok Pok",
 			initials: "PP",
+			 title: "Nibel.eth",
 			address: "0xC2ca7C647c7959F14700d8fD5B6219b44Ca56930",
 			backgroundImage: "/card_pok.png",
 			textColor: "black",
@@ -405,15 +411,15 @@ return (
 	{!showConsentPopup && (
   <>
     <div className="page-header cc-complain">
+          <Link to="/" style={{ textDecoration: 'none' }}>
       <div className="c-back">
         <div className="c-back_btn">
-          <Link to="/" style={{ textDecoration: 'none' }}>
             <img src="/images/left-chevron.svg" alt="" className="icon-20" />
             <div>Back</div>
-          </Link>
         </div>
       </div>
-      <h2>Complain to {recipientInfo[recipient].name}</h2>
+          </Link>
+      <h2 style={{ textTransform: 'capitalize' }}>Complain to {recipientInfo[recipient].name}</h2>
     </div>
     <div className="c-complaint_intro">
       Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain.
@@ -432,8 +438,8 @@ return (
               <div className="v2-avatar-ellipse-2"></div>
             </div>
           </div>
-          <div className="c-slip_title">
-            <div className="c-slip_receipient">{recipientInfo[recipient].name}</div>
+          <div className="c-slip_title" style={{ textTransform: 'capitalize' }}>
+            <div className="c-slip_receipient" >{recipientInfo[recipient].name}</div>
             <div>{recipientInfo[recipient].title}</div>
           </div>
         </div>
@@ -472,8 +478,8 @@ return (
               </button>
             </form>
           ) : (
-            <div className="c-slip_empty">
-              <div>
+            <div className="c-slip_empty" >
+              <div style={{ textTransform: 'capitalize' }}>
                 Connect your wallet to <br />
                 complain to {recipientInfo[recipient].name}
               </div>

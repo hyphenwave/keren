@@ -52,6 +52,7 @@ root.render(
             path="/jesse"
             element={
               <div className="App">
+                   <Navbar/>
                 <ComplaintBox recipient="jesse" />
                 <Footer />
               </div>
@@ -61,6 +62,7 @@ root.render(
             path="/brian"
             element={
               <div className="App">
+                   <Navbar/>
                 <ComplaintBox recipient="brian" />
                 <Footer />
               </div>
@@ -71,7 +73,7 @@ root.render(
             path="/basedmerch"
             element={
               <div className="App">
-              
+                   <Navbar/>
                 <ComplaintBox recipient="basedmerch" />
                 <Footer />
               </div>
@@ -82,6 +84,7 @@ root.render(
             path="/mykcryptodev"
             element={
               <div className="App">
+                   <Navbar/>
                 <ComplaintBox recipient="mykcryptodev" />
                 <Footer />
               </div>
@@ -102,6 +105,7 @@ root.render(
             path="/tybg"
             element={
               <div className="App">
+                   <Navbar/>
                 <ComplaintBox recipient="tybg" />
                 <Footer />
               </div>
@@ -112,7 +116,7 @@ root.render(
             path="/pokpok"
             element={
               <div className="App">
-              
+                   <Navbar/>
                 <ComplaintBox recipient="pokpok" />
                 <Footer />
               </div>

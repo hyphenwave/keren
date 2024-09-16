@@ -17,7 +17,7 @@ const Navbar = () => {
         <Link to="/dashboard" className="navbar-page w-inline-block">
           <div>Dashboard</div>
         </Link>
-        <a href="#" className="navbar-page w-inline-block">
+        <a href="#" className="navbar-page analytics w-inline-block">
           <div>
             Analytics <span className="coming-soon"> coming soon</span>
           </div>
