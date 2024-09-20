@@ -1,34 +1,72 @@
+
+import { Link } from 'react-router-dom';
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import styles from "./Homepage.module.css";
-import RatingSystem from "../RatingSystem/RatingSystem"; 
+import { motion } from 'framer-motion';
+import RatingSystem from "../RatingSystem/RatingSystem";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { EffectCards } from "swiper/modules";
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/effect-cards';
+
 
 const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [expandedCategory, setExpandedCategory] = useState(null);
+  const [activeTab, setActiveTab] = useState("Ecosystem projects");
 
   const complaintBoxes = {
     pinned: [
-      { name: "Jesse", link: "/jesse", title: "(Manager of Base)", twitter: "jessepollak" },
-      { name: "Brian", link: "/brian", title: "(Manager of Coinbase)", twitter: "brian_armstrong" },
-      { name: "TYBG", link: "/tybg", title: "(Based God)", twitter: "tybasegod" },
+      {
+        name: "Jesse",
+        title: "Manager of Base",
+        initials: "JE",
+        twitter: "jessepollak",
+      },
+      {
+        name: "Brian",
+        title: "Manager of Coinbase",
+        initials: "BR",
+        twitter: "brian_armstrong",
+      },
+      {
+        name: "TYBG",
+        title: "Based God",
+        initials: "TY",
+        twitter: "tybasegod",
+      },
     ],
-    "ecosystem projects": [
-      { name: "Based Merch", link: "/basedmerch", title: "Store", twitter: "basedmerchstore" },
-      { name: "Base Token Store", link: "/mykcryptodev", title: "(Mykcryptodev)", twitter: "mykcryptodev" },
-      { name: "PokPok", link: "/pokpok", title: "(Nibel.eth)", twitter: "Nibel_eth" },
+    "Ecosystem projects": [
+      {
+        name: "Based Merch Store",
+        title: "Manager",
+        initials: "BM",
+        twitter: "basedmerchstore",
+      },
+      {
+        name: "Base Token Store",
+        title: "Mykcryptodev",
+        initials: "BT",
+        twitter: "mykcryptodev",
+      },
+      {
+        name: "PokPok",
+        title: "Nibel.eth",
+        initials: "PP",
+        twitter: "Nibel_eth",
+      },
     ],
-    communities: [
-      { name: "TYBG", link: "/tybg", title: "(Based God)", twitter: "tybasegod" },
-      // { name: "Boris", link: "/boris", title: "(Boris The Wizard)", twitter: "bwizofficial" },
+    Communities: [
+      {
+        name: "TYBG",
+        title: "Based God",
+        initials: "TY",
+        twitter: "tybasegod",
+      },
     ],
-    influencers: [
-      // Add influencer boxes here with their Twitter handles
+    Influencers: [
+      // Add influencer boxes here
     ],
-  };
-
-  const toggleCategory = (category) => {
-    setExpandedCategory(expandedCategory === category ? null : category);
   };
 
   const filterBoxes = (boxes) => {
@@ -37,85 +75,150 @@ const Homepage = () => {
     );
   };
 
-  const renderBoxes = (boxes) => {
-    return filterBoxes(boxes).map((box) => (
-      <div key={box.name} className={styles.boxWrapper}>
-        <Link to={box.link} className={styles.box}>
-          <div>Complain To {box.name}</div>
-          <div>{box.title}</div>
-        </Link>
+  const renderComplaintCard = (box, avatarClass) => (
+   <Link to={`/${box.name.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+      <div key={box.name} className={`c-complain_card`}>
+        <div className={`c-avatar-${avatarClass}`}>
+          <div className="avatar-initals">{box.initials}</div>
+          <div className={`${avatarClass}-avatar-ellipse-1`}></div>
+          <div className={`${avatarClass}-avatar-ellipse-3`}></div>
+          <div className={`${avatarClass}-avatar-ellipse-2`}></div>
+        </div>
+        <div>
+          <div className="c-complain_title">{box.name}</div>
+          <div className="c-title_sub">{box.title}</div>
+        </div>
+        <div className="c-complain_actions">
+          <a
+            href={`https://twitter.com/${box.twitter}`}
+            className="c-complain_action w-inline-block"
+          >
+            <img
+              src="images/twitter.svg"
+              loading="lazy"
+              alt=""
+              className="c-action_icon"
+            />
+          </a>
+          <a href="#" className="c-complain_action w-inline-block">
+            <img
+              src="images/telegram.svg"
+              loading="lazy"
+              alt=""
+              className="c-action_icon"
+            />
+          </a>
+          <a href="#" className="c-complain_action w-inline-block">
+            <img
+              src="images/website.svg"
+              loading="lazy"
+              alt=""
+              className="c-action_icon"
+            />
+          </a>
+        </div>
         <RatingSystem boxName={box.name} twitterHandle={box.twitter} />
       </div>
-    ));
-  };
-
-  const isSearchActive = searchQuery.trim() !== "";
+ </Link>
+  );
 
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Complain OnChain</h1>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        className={styles.searchBar}
-      />
-      <div className={styles.boxesGrid}>
-        {renderBoxes(complaintBoxes.pinned)}
-      </div>
-      <div className={styles.categoriesContainer}>
-        {Object.entries(complaintBoxes).map(([category, boxes]) => {
-          if (category === 'pinned') return null;
-          const filteredBoxes = filterBoxes(boxes);
-          return (
-            <div key={category} className={styles.category}>
-              <button
-                className={styles.categoryButton}
-                onClick={() => toggleCategory(category)}
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-                <span className={styles.expandIcon}>
-                  {expandedCategory === category ? '▼' : '▶'}
-                </span>
-              </button>
-              {(isSearchActive || expandedCategory === category) && filteredBoxes.length > 0 && (
-                <div className={styles.categoryContent}>
-                  <div className={styles.boxesGrid}>
-                    {renderBoxes(filteredBoxes)}
-                  </div>
-                </div>
+  <motion.div
+     initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
+      <div className="body">
+        <section className="content">
+          <div className="hero-block">
+            <h1>Complain Onchain</h1>
+            <div className="c-hero_image">
+              <img
+                src="images/Keren-Mad-3.png"
+                loading="lazy"
+                sizes="(max-width: 767px) 96px, 200px"
+                srcSet="images/Keren-Mad-3-p-500.png 500w, images/Keren-Mad-3.png 566w"
+                alt=""
+                className="c-image"
+              />
+            </div>
+          </div>
+          <div className="searchbar">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <div className="search-icon">
+              <img
+                src="images/search.svg"
+                loading="lazy"
+                alt=""
+                className="c-icon"
+              />
+            </div>
+          </div>
+          <div className="c-complain">
+            <div>Speak directly to the manager</div>
+            <div className="c-complain_cards">
+              {filterBoxes(complaintBoxes.pinned).map((box, index) =>
+                renderComplaintCard(box, `v${index + 1}`)
               )}
             </div>
-          );
-        })}
+          </div>
+          <div className="c-complain_about">
+            <div className="c-about_title">
+              <div className="a-about_image">
+                <img
+                  src="images/image-2.png"
+                  loading="lazy"
+                  alt=""
+                  className="c-image"
+                />
+              </div>
+              <h3>Complain about</h3>
+            </div>
+            <div className="c-complain_categories">
+              <div className="c-categories_container">
+                <div className="c-categories">
+                  {Object.keys(complaintBoxes)
+                    .filter((key) => key !== "pinned")
+                    .map((category) => (
+                      <button
+                        key={category}
+                        className={`tab ${
+                          activeTab === category ? "cc-active" : ""
+                        } w-button`}
+                        onClick={() => setActiveTab(category)}
+                      >
+                        {category}
+                      </button>
+                    ))}
+                </div>
+              </div>
+  
+              <Swiper
+                effect={'cards'}
+                grabCursor={true}
+                modules={[EffectCards]}
+                className="mySwiper"
+              >
+                <div className="c-complain_cards">
+                  {filterBoxes(complaintBoxes[activeTab]).map((box, index) => (
+                    <SwiperSlide key={index}>
+                      <div className="cc-stack" id="w-node-b1ad92b1-edca-2abf-e981-88f639d5580f-743ba4e5">
+                        {renderComplaintCard(box, "v1")}
+                      </div>
+                    </SwiperSlide>
+                  ))}
+                </div>
+              </Swiper>
+            </div>
+          </div>
+        </section>
       </div>
-      {isSearchActive && Object.values(complaintBoxes).flat().filter(box => 
-        box.name.toLowerCase().includes(searchQuery.toLowerCase())
-      ).length === 0 && (
-        <p className={styles.noResults}>No results found</p>
-      )}
-      <Footer />
-    </div>
-  );
-};
-
-const Footer = () => {
-  return (
-    <div className={styles.Footer}>
-      <a href="https://www.basedkeren.com/" className={styles.webLink}>
-        Keren Website
-      </a>
-      <a href="https://t.me/kerenbase">Telegram</a>
-      <a href="https://dexscreener.com/base/0x1ca25a133160beb02b18c1983c997fafbe98bc6e">
-        Chart
-      </a>
-      <a href="https://warpcast.com/basedkeren">Warpcast</a>
-      <a href="https://www.dextools.io/app/en/base/pair-explorer/0x1ca25a133160beb02b18c1983c997fafbe98bc6e?t=1715622444271">
-        Video Tutorial
-      </a>
-      <a href="/dashboard">Dashboard</a>
-    </div>
+ </motion.div>
   );
 };
 

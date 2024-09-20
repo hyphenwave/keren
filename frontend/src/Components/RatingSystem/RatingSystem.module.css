@@ -1,5 +1,6 @@
 .ratingSystem {
-  display: flex;
+  /* display: flex; */
+  display: none;
   justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
