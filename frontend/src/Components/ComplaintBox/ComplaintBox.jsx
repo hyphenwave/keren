@@ -39,7 +39,7 @@ const ComplaintBox = ({ recipient }) => {
 	const recipientInfo = {
 		jesse: {
 			name: "jesse",
-			  title: "Manager of Base",
+			title: "Manager of Base",
 			initials: "JE",
 			address: "0x849151d7d0bf1f34b70d5cad5149d28cc2308bf1",
 			backgroundImage: "/card.png",
@@ -62,7 +62,7 @@ const ComplaintBox = ({ recipient }) => {
 		},
 		brian: {
 			name: "brian",
-			 title: "Manager of Coinbase",
+			title: "Manager of Coinbase",
 			initials: "BR",
 			address: "0x5b76f5B8fc9D700624F78208132f91AD4e61a1f0",
 			backgroundImage: "/card_brian.png",
@@ -107,7 +107,7 @@ const ComplaintBox = ({ recipient }) => {
 		},
 		mykcryptodev: {
 			name: "Base Token Store",
-		  initials: "BT",
+			initials: "BT",
 			title: "Mykcryptodev",
 			address: "0x5079EC85c3c8F8E932Bd011B669b77d703DEEea7",
 			backgroundImage: "/card_myk.png",
@@ -163,9 +163,9 @@ const ComplaintBox = ({ recipient }) => {
 			),
 		},
 		tybg: {
-		name: "TYBG",
+			name: "TYBG",
 			initials: "TY",
-			    title: "Based God",
+			title: "Based God",
 			address: "0x2270a4ca23614eCE42905045b1fF2CB2a396c4Ff",
 			backgroundImage: "/card_tybg.png",
 			textColor: "black",
@@ -185,7 +185,7 @@ const ComplaintBox = ({ recipient }) => {
 		pokpok: {
 			name: "Pok Pok",
 			initials: "PP",
-			 title: "Nibel.eth",
+			title: "Nibel.eth",
 			address: "0xC2ca7C647c7959F14700d8fD5B6219b44Ca56930",
 			backgroundImage: "/card_pok.png",
 			textColor: "black",
@@ -202,17 +202,132 @@ const ComplaintBox = ({ recipient }) => {
 				</>
 			),
 		},
+		jeetolax: {
+			name: "jeetolax",
+			title: "Community",
+			initials: "JT",
+			address: "0x3F2E8Ec867148CB0F61e7eD7eDF04f986d84a94",
+			backgroundImage: "/card_jeetolax.png",
+			textColor: "white",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or
+						feedback for the Base network, please feel free to write it below
+						and it will get sent directly onchain to the manager of Base (Jesse
+						Pollak).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
+		jessechrist: {
+			name: "Jesse Christ",
+			title: "Community",
+			initials: "JC",
+			address: "0xB88E66613a1614b29443521b0A3A02E4590c7922",
+			backgroundImage: "/card_jessechrist.png",
+			textColor: "black",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or
+						feedback for the Base network, please feel free to write it below
+						and it will get sent directly onchain to the manager of Base (Jesse
+						Pollak).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
+		millionbit: {
+			name: "MillionBitHomepage",
+			title: "Community",
+			initials: "MB",
+			address: "0x91a0C767E86e832D279fAa2b4B9DEDA28BBb26cE",
+			backgroundImage: "/card_million.png",
+			textColor: "white",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or
+						feedback for the Base network, please feel free to write it below
+						and it will get sent directly onchain to the manager of Base (Jesse
+						Pollak).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
+		rachel: {
+			name: "rachel",
+			title: "Influencer",
+			initials: "RC",
+			address: "0x1c3e54735D30912d391EcdF34B049d3e3743EbbB",
+			backgroundImage: "/card_rachel.png",
+			textColor: "black",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or
+						feedback for the Base network, please feel free to write it below
+						and it will get sent directly onchain to the manager of Base (Jesse
+						Pollak).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
+		crypticpoet: {
+			name: "crypticpoet",
+			title: "Influencer",
+			initials: "CP",
+			address: "0x9d32572997DA4948063E3Fc11c2552Eb82F7208E",
+			backgroundImage: "/card_crypticpoet.png",
+			textColor: "white",
+			description: (
+				<>
+					<p className={styles.description}>
+						Welcome to Complain Onchain, darling! If you have a complaint or
+						feedback for the Base network, please feel free to write it below
+						and it will get sent directly onchain to the manager of Base (Jesse
+						Pollak).
+					</p>
+					<p className={styles.description}>
+						If you want something done right, you've got to do it onchain!
+						<br />
+						Let's make Base a better place, together.
+					</p>
+				</>
+			),
+		},
 	};
 
-	  const [selectedOptions, setSelectedOptions] = useState([]);
+	const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const handleOptionToggle = (optionName) => {
-    setSelectedOptions(prevSelected => 
-      prevSelected.includes(optionName)
-        ? prevSelected.filter(name => name !== optionName)
-        : [...prevSelected, optionName]
-    );
-  };
+	const handleOptionToggle = (optionName) => {
+		setSelectedOptions(prevSelected =>
+			prevSelected.includes(optionName)
+				? prevSelected.filter(name => name !== optionName)
+				: [...prevSelected, optionName]
+		);
+	};
 
 	const getCheckboxOptions = (recipient) => {
 		const commonOptions = [
@@ -239,15 +354,16 @@ const ComplaintBox = ({ recipient }) => {
 	};
 
 	const checkboxOptions = getCheckboxOptions(recipient);
+	const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 	useEffect(() => {
 		const checkboxOptions = getCheckboxOptions(recipient);
 		const initialCheckboxes = checkboxOptions.reduce((acc, option) => {
-		  acc[option.name] = false;
-		  return acc;
+			acc[option.name] = false;
+			return acc;
 		}, {});
 		setCheckboxes(initialCheckboxes);
-	  }, [recipient]);
+	}, [recipient]);
 
 	const handleCheckboxChange = (event) => {
 		setCheckboxes({
@@ -322,217 +438,217 @@ const ComplaintBox = ({ recipient }) => {
 		setShowConsentPopup(false);
 	};
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 
-    if (complaint.length > 500) {
-      toast.error("Please limit your complaint to 500 characters.");
-      return;
-    }
+		if (complaint.length > 500) {
+			toast.error("Please limit your complaint to 500 characters.");
+			return;
+		}
 
-    try {
-      setIsLoading(true);
-      toast.loading("Submitting complaint...");
+		try {
+			setIsLoading(true);
+			toast.loading("Submitting complaint...");
 
-      const totalSupply = await readContract(config, {
-        abi,
-        address: TokenAddress,
-        functionName: 'totalSupply',
-      });
-      const tokenId = (Number(totalSupply) + 1).toString();
+			const totalSupply = await readContract(config, {
+				abi,
+				address: TokenAddress,
+				functionName: 'totalSupply',
+			});
+			const tokenId = (Number(totalSupply) + 1).toString();
 
-      const randomString = generateRandomString();
+			const randomString = generateRandomString();
 
-      const imageBlob = await generateComplaintImage(complaint, address);
-      const imageFileName = `card-${randomString}.png`;
-      const imageHash = await pinFileToIPFS(imageBlob, imageFileName);
+			const imageBlob = await generateComplaintImage(complaint, address);
+			const imageFileName = `card-${randomString}.png`;
+			const imageHash = await pinFileToIPFS(imageBlob, imageFileName);
 
-      const metadata = {
-        name: `Complaint NFT #${tokenId}`,
-        description: complaint,
-        external_url: "https://www.basedkeren.com/",
-        image: `ipfs://${imageHash}`,
-        attributes: selectedOptions.map(option => ({
-          trait_type: option,
-          value: "Yes",
-        })),
-      };
+			const metadata = {
+				name: `Complaint NFT #${tokenId}`,
+				description: complaint,
+				external_url: "https://www.basedkeren.com/",
+				image: `ipfs://${imageHash}`,
+				attributes: selectedOptions.map(option => ({
+					trait_type: option,
+					value: "Yes",
+				})),
+			};
 
-      const metadataFileName = `metadata-${randomString}.json`;
-      const metadataHash = await pinJSONToIPFS(metadata, metadataFileName);
+			const metadataFileName = `metadata-${randomString}.json`;
+			const metadataHash = await pinJSONToIPFS(metadata, metadataFileName);
 
-      const hash = await writeContractAsync({
-        address: TokenAddress,
-        abi,
-        functionName: "safeMint",
-        args: [address, `ipfs://${metadataHash}`]
-      });
+			const hash = await writeContractAsync({
+				address: TokenAddress,
+				abi,
+				functionName: "safeMint",
+				args: [address, `ipfs://${metadataHash}`]
+			});
 
-      const mintReceipt = await waitForTransactionReceipt(config, {
-        hash: hash,
-      });
+			const mintReceipt = await waitForTransactionReceipt(config, {
+				hash: hash,
+			});
 
-      if (mintReceipt.logs && mintReceipt.logs.length > 0) {
-        const tokenIdHex = mintReceipt.logs[0].topics[3];
-        const tokenIdDecimal = parseInt(tokenIdHex, 16);
-        const tokenIdString = tokenIdDecimal.toString();
+			if (mintReceipt.logs && mintReceipt.logs.length > 0) {
+				const tokenIdHex = mintReceipt.logs[0].topics[3];
+				const tokenIdDecimal = parseInt(tokenIdHex, 16);
+				const tokenIdString = tokenIdDecimal.toString();
 
-        await writeContractAsync({
-          address: TokenAddress,
-          abi,
-          functionName: "safeTransferFrom",
-          args: [address, recipientInfo[recipient].address, tokenIdString]
-        });
+				await writeContractAsync({
+					address: TokenAddress,
+					abi,
+					functionName: "safeTransferFrom",
+					args: [address, recipientInfo[recipient].address, tokenIdString]
+				});
 
-        toast.success("Complaint submitted and NFT transferred successfully");
-        setComplaint("");
-        setSelectedOptions([]);
-      } else {
-        toast.warning("Complaint submitted, but token ID not found. The complaint was submitted successfully, but the token ID could not be retrieved.");
-      }
-    } catch (error) {
-      console.error("Error submitting complaint:", error);
-      toast.error("An error occurred while submitting the complaint. Please try again.");
-    } finally {
-      setIsLoading(false);
-      toast.dismiss();
-    }
-  };
+				toast.success("Complaint submitted and NFT transferred successfully");
+				setComplaint("");
+				setSelectedOptions([]);
+			} else {
+				toast.warning("Complaint submitted, but token ID not found. The complaint was submitted successfully, but the token ID could not be retrieved.");
+			}
+		} catch (error) {
+			console.error("Error submitting complaint:", error);
+			toast.error("An error occurred while submitting the complaint. Please try again.");
+		} finally {
+			setIsLoading(false);
+			toast.dismiss();
+		}
+	};
 
 
-return (
- <motion.div
-     initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
-	    <div className="content"> 
-			<Toaster position="top-center" />
+	return (
+		<motion.div
+			initial={{ opacity: 0 }}
+			animate={{ opacity: 1 }}
+			transition={{ duration: 1 }}
+		>
+			<div className="content">
+				<Toaster position="top-center" />
 				{showConsentPopup && <ConsentPopup onAccept={handleConsentAccept} />}
-			{/* conditionally render the rest of the page */}
-	{!showConsentPopup && (
-  <>
-    <div className="page-header cc-complain">
-          <Link to="/" style={{ textDecoration: 'none' }}>
-      <div className="c-back">
-        <div className="c-back_btn">
-            <img src="/images/left-chevron.svg" alt="" className="icon-20" />
-            <div>Back</div>
-        </div>
-      </div>
-          </Link>
-      <h2 style={{ textTransform: 'capitalize' }}>Complain to {recipientInfo[recipient].name}</h2>
-    </div>
-    <div className="c-complaint_intro">
-      Welcome to Complain Onchain, darling! If you have a complaint or feedback for Coinbase, please feel free to write it below and it will get sent directly onchain.
-      <br />
-      <br />
-      If you want something done right, you've got to do it onchain! Let's make Base a better place, together.
-    </div>
-    <div className="c-complaint_container">
-      <div className="c-complaint_slip" id="w-node-_6a4cba5e-ab3e-6b94-3e8e-c03fcb434850-3884ff87">
-        <div className="c-slip_header">
-          <div className="c-slip_avatar">
-            <div className="c-avatar-v2 cc-32">
-              <div className="avatar-initals cc-32">{recipientInfo[recipient].initials}</div>
-              <div className="v2-avatar-ellipse-1 cc-32"></div>
-              <div className="v2-avatar-ellipse-3"></div>
-              <div className="v2-avatar-ellipse-2"></div>
-            </div>
-          </div>
-          <div className="c-slip_title" style={{ textTransform: 'capitalize' }}>
-            <div className="c-slip_receipient" >{recipientInfo[recipient].name}</div>
-            <div>{recipientInfo[recipient].title}</div>
-          </div>
-        </div>
-        <div className="hor-divider"></div>
-        <div className="c-slip_body">
-          {address ? (
-            <form onSubmit={handleSubmit} className="c-slip_form">
-              <div className="c-slip_related">
-                <div>Related to</div>
-                <div className="c-related_group">
-                  {checkboxOptions.map((option) => (
-                    <button
-                      key={option.name}
-                      type="button"
-                      className={`c-related_pill ${selectedOptions.includes(option.name) ? 'selected' : ''}`}
-                      onClick={() => handleOptionToggle(option.name)}
-                    >
-                      {option.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className="c-slip_message">
-                <div>Complaint</div>
-                <div className="c-input_max">{complaint.length}/500</div>
-                <textarea
-                  value={complaint}
-                  onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
-                  className="c-input"
-                  placeholder="Type complaint"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn cc-primary cc-248" disabled={isLoading}>
-                {isLoading ? 'Submitting...' : 'Submit Complaint'}
-              </button>
-            </form>
-          ) : (
-            <div className="c-slip_empty" >
-              <div style={{ textTransform: 'capitalize' }}>
-                Connect your wallet to <br />
-                complain to {recipientInfo[recipient].name}
-              </div>
-           <WalletButtons/>
-            </div>
-          )}
-        </div>
-      </div>
-      <div className="cc-complaint_box" id="w-node-e491cd5e-f8c8-14b5-3319-53c4438bd969-3884ff87">
-        <img src="images/complaint-box.png" alt="Complaint Box" className="box-image" />
-      </div>
-    </div>
-  </>
-)}
+				{/* conditionally render the rest of the page */}
+				{!showConsentPopup && (
+					<>
+						<div className="page-header cc-complain">
+							<Link to="/" style={{ textDecoration: 'none' }}>
+								<div className="c-back">
+									<div className="c-back_btn">
+										<img src="/images/left-chevron.svg" alt="" className="icon-20" />
+										<div>Back</div>
+									</div>
+								</div>
+							</Link>
+							<h2 style={{ textTransform: 'capitalize' }}>Complain to {recipientInfo[recipient].name}</h2>
+						</div>
+						<div className="c-complaint_intro">
+							Welcome to Complain Onchain, darling! If you have a complaint or feedback for {capitalize(recipientInfo[recipient].name)}, please feel free to write it below and it will get sent directly onchain.
+							<br />
+							<br />
+							If you want something done right, you've got to do it onchain! Let's make Base a better place, together.
+						</div>
+						<div className="c-complaint_container">
+							<div className="c-complaint_slip" id="w-node-_6a4cba5e-ab3e-6b94-3e8e-c03fcb434850-3884ff87">
+								<div className="c-slip_header">
+									<div className="c-slip_avatar">
+										<div className="c-avatar-v2 cc-32">
+											<div className="avatar-initals cc-32">{recipientInfo[recipient].initials}</div>
+											<div className="v2-avatar-ellipse-1 cc-32"></div>
+											<div className="v2-avatar-ellipse-3"></div>
+											<div className="v2-avatar-ellipse-2"></div>
+										</div>
+									</div>
+									<div className="c-slip_title" style={{ textTransform: 'capitalize' }}>
+										<div className="c-slip_receipient" >{recipientInfo[recipient].name}</div>
+										<div>{recipientInfo[recipient].title}</div>
+									</div>
+								</div>
+								<div className="hor-divider"></div>
+								<div className="c-slip_body">
+									{address ? (
+										<form onSubmit={handleSubmit} className="c-slip_form">
+											<div className="c-slip_related">
+												<div>Related to</div>
+												<div className="c-related_group">
+													{checkboxOptions.map((option) => (
+														<button
+															key={option.name}
+															type="button"
+															className={`c-related_pill ${selectedOptions.includes(option.name) ? 'selected' : ''}`}
+															onClick={() => handleOptionToggle(option.name)}
+														>
+															{option.label}
+														</button>
+													))}
+												</div>
+											</div>
+											<div className="c-slip_message">
+												<div>Complaint</div>
+												<div className="c-input_max">{complaint.length}/500</div>
+												<textarea
+													value={complaint}
+													onChange={(e) => setComplaint(e.target.value.slice(0, 500))}
+													className="c-input"
+													placeholder="Type complaint"
+													required
+												/>
+											</div>
+											<button type="submit" className="btn cc-primary cc-248" disabled={isLoading}>
+												{isLoading ? 'Submitting...' : 'Submit Complaint'}
+											</button>
+										</form>
+									) : (
+										<div className="c-slip_empty" >
+											<div style={{ textTransform: 'capitalize' }}>
+												Connect your wallet to <br />
+												complain to {recipientInfo[recipient].name}
+											</div>
+											<WalletButtons />
+										</div>
+									)}
+								</div>
+							</div>
+							<div className="cc-complaint_box" id="w-node-e491cd5e-f8c8-14b5-3319-53c4438bd969-3884ff87">
+								<img src="images/complaint-box.png" alt="Complaint Box" className="box-image" />
+							</div>
+						</div>
+					</>
+				)}
 
-	      <canvas ref={canvasRef} style={{ display: "none" }} />
-	    </div>
-</motion.div>
-  );
+				<canvas ref={canvasRef} style={{ display: "none" }} />
+			</div>
+		</motion.div>
+	);
 };
 
 
 
 const WalletButtons = () => {
-  const { connectors, connect } = useConnect();
+	const { connectors, connect } = useConnect();
 
-  const handleCreateWallet = useCallback(() => {
-    const coinbaseWalletConnector = connectors.find(
-      (connector) => connector.id === 'coinbaseWalletSDK'
-    );
-    if (coinbaseWalletConnector) {
-      connect({ connector: coinbaseWalletConnector });
-    }
-  }, [connectors, connect]);
+	const handleCreateWallet = useCallback(() => {
+		const coinbaseWalletConnector = connectors.find(
+			(connector) => connector.id === 'coinbaseWalletSDK'
+		);
+		if (coinbaseWalletConnector) {
+			connect({ connector: coinbaseWalletConnector });
+		}
+	}, [connectors, connect]);
 
-  return (
-    <div className="c-slip_btns">
-      <ConnectKitProvider>
-        <ConnectKitButton.Custom>
-          {({ show }) => (
-            <button onClick={show} className="btn">
-              Connect Wallet
-            </button>
-          )}
-        </ConnectKitButton.Custom>
-        <button onClick={handleCreateWallet} className="btn cc-ghost w-button">
-          Create Wallet
-        </button>
-      </ConnectKitProvider>
-    </div>
-  );
+	return (
+		<div className="c-slip_btns">
+			<ConnectKitProvider>
+				<ConnectKitButton.Custom>
+					{({ show }) => (
+						<button onClick={show} className="btn">
+							Connect Wallet
+						</button>
+					)}
+				</ConnectKitButton.Custom>
+				<button onClick={handleCreateWallet} className="btn cc-ghost w-button">
+					Create Wallet
+				</button>
+			</ConnectKitProvider>
+		</div>
+	);
 };
 
 

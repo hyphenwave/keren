@@ -122,6 +122,57 @@ root.render(
               </div>
             }
           />
+<Route
+            path="/jeetolax"
+            element={
+              <div className="App">
+                   <Navbar/>
+                <ComplaintBox recipient="jeetolax" />
+                <Footer />
+              </div>
+            }
+          />
+<Route
+            path="/jesse christ"
+            element={
+              <div className="App">
+                   <Navbar/>
+                <ComplaintBox recipient="jessechrist" />
+                <Footer />
+              </div>
+            }
+          />
+<Route
+            path="/millionbithomepage"
+            element={
+              <div className="App">
+                   <Navbar/>
+                <ComplaintBox recipient="millionbit" />
+                <Footer />
+              </div>
+            }
+          />
+<Route
+            path="/rachel"
+            element={
+              <div className="App">
+                   <Navbar/>
+                <ComplaintBox recipient="rachel" />
+                <Footer />
+              </div>
+            }
+          />
+
+<Route
+            path="/crypticpoet"
+            element={
+              <div className="App">
+                   <Navbar/>
+                <ComplaintBox recipient="crypticpoet" />
+                <Footer />
+              </div>
+            }
+          />
 
           <Route
             path="/dashboard"

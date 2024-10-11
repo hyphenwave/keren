@@ -63,9 +63,38 @@ const Homepage = () => {
         initials: "TY",
         twitter: "tybasegod",
       },
+      {
+        name: "Jeetolax",
+        title: "Community",
+        initials: "JT",
+        twitter: "jeetolax",
+      },
+      {
+        name: "Jesse Christ",
+        title: "Community",
+        initials: "JC",
+        twitter: "jessechrist",
+      },
+      {
+        name: "MillionBitHomepage",
+        title: "Community",
+        initials: "MB",
+        twitter: "millionbithomepage",
+      },
     ],
     Influencers: [
-      // Add influencer boxes here
+      {
+        name: "Rachel",
+        title: "Influencer",
+        initials: "RC",
+        twitter: "rachel",
+      },
+      {
+        name: "Crypticpoet",
+        title: "Influencer",
+        initials: "CP",
+        twitter: "crypticpoet",
+      },
     ],
   };
 
