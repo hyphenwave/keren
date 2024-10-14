@@ -428,10 +428,9 @@ const ComplaintBox = ({ recipient }) => {
 		ctx.fillText(`- ${userAddress}`, padding, userAddressY);
 
 		// Convert canvas to blob
-		const blob = await new Promise((resolve) => {
+		return new Promise((resolve) => {
 			canvas.toBlob(resolve, "image/png");
 		});
-		return blob;
 	};
 
 	const handleConsentAccept = () => {
@@ -460,8 +459,11 @@ const ComplaintBox = ({ recipient }) => {
 			const randomString = generateRandomString();
 
 			const imageBlob = await generateComplaintImage(complaint, address);
+			console.log("Image blob generated:", imageBlob);
+
 			const imageFileName = `card-${randomString}.png`;
 			const imageHash = await pinFileToIPFS(imageBlob, imageFileName);
+			console.log("Image pinned to IPFS:", imageHash);
 
 			const metadata = {
 				name: `Complaint NFT #${tokenId}`,
@@ -508,6 +510,10 @@ const ComplaintBox = ({ recipient }) => {
 			}
 		} catch (error) {
 			console.error("Error submitting complaint:", error);
+			console.error("Error details:", error.message);
+			if (error.response) {
+				console.error("Error response:", error.response.data);
+			}
 			toast.error("An error occurred while submitting the complaint. Please try again.");
 		} finally {
 			setIsLoading(false);
@@ -613,7 +619,7 @@ const ComplaintBox = ({ recipient }) => {
 					</>
 				)}
 
-				<canvas ref={canvasRef} style={{ display: "none" }} />
+				<canvas ref={canvasRef} width="1414" height="2000" style={{ display: "none", position: "absolute", left: "-9999px" }} />
 			</div>
 		</motion.div>
 	);
