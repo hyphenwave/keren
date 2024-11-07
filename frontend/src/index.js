@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../src/css/normalize.css";
@@ -9,183 +9,141 @@ import ComplaintBox from "./Components/ComplaintBox/ComplaintBox";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Homepage from "./Components/Homepage/Homepage";
 import Navbar from "./Components/NavBar.jsx";
+import NotFound from "./Components/NotFound/NotFound";
+import AdminDashboard from "./Components/AdminDashboard/AdminDashboard";
+import { createClient } from '@supabase/supabase-js';
 
 import config from "./config";
 import { WagmiProvider } from "wagmi";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_SUPABASE_ANON_KEY
+);
 
 const queryClient = new QueryClient();
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
 const Footer = () => {
   return (
-   <section className="footer">
-        <div className="c-footer_image"><img src="images/Keren-Writing-A-Complaint-1.png" loading="lazy" alt="" className="c-image" /></div>
-        <div className="w-layout-vflex c-footer_content">
-          <div className="c-footer_title">Complain OnChain</div>
-          <div>Family of BasedKeren</div>
-          <div>2024</div>
-        </div>
-      </section>
+    <section className="footer">
+      <div className="c-footer_image">
+        <img
+          src="images/Keren-Writing-A-Complaint-1.png"
+          loading="lazy"
+          alt=""
+          className="c-image"
+        />
+      </div>
+      <div className="w-layout-vflex c-footer_content">
+        <div className="c-footer_title">Complain OnChain</div>
+        <div>Family of BasedKeren</div>
+        <div>2024</div>
+      </div>
+    </section>
   );
 };
 
+const App = () => {
+  const [routes, setRoutes] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  useEffect(() => {
+    fetchRoutes();
+  }, []);
 
+  const fetchRoutes = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('complaint_boxes')
+        .select('slug')
+        .order('slug');
 
-root.render(
-  <WagmiProvider config={config}>
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-      <div>
-      <Navbar/>
-            <Homepage/>
-                 <Footer />  
-      </div>
-          }
-           />
-          <Route
-            path="/jesse"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="jesse" />
-                <Footer />
-              </div>
-            }
-          />
-          <Route
-            path="/brian"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="brian" />
-                <Footer />
-              </div>
-            }
-          />
+      if (error) throw error;
 
-          <Route
-            path="/basedmerch"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="basedmerch" />
-                <Footer />
-              </div>
-            }
-          />
+      setRoutes(data || []);
+    } catch (error) {
+      console.error('Error fetching routes:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-          <Route
-            path="/mykcryptodev"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="mykcryptodev" />
-                <Footer />
-              </div>
-            }
-          />
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
-          {/* <Route
-            path="/boris"
-            element={
-              <div className="App">
-                <ComplaintBox recipient="Boris" />
-                <Footer />
-              </div>
-            }
-          /> */}
+  return (
+    <WagmiProvider config={config}>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            {/* Static routes */}
+            <Route
+              path="/"
+              element={
+                <div>
+                  <Navbar />
+                  <Homepage />
+                  <Footer />
+                </div>
+              }
+            />
 
-<Route
-            path="/tybg"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="tybg" />
-                <Footer />
-              </div>
-            }
-          />
+            <Route
+              path="/dashboard"
+              element={
+                <div className="App">
+                  <Navbar />
+                  <Dashboard />
+                  <Footer />
+                </div>
+              }
+            />
 
-<Route
-            path="/pokpok"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="pokpok" />
-                <Footer />
-              </div>
-            }
-          />
-<Route
-            path="/jeetolax"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="jeetolax" />
-                <Footer />
-              </div>
-            }
-          />
-<Route
-            path="/jesse christ"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="jessechrist" />
-                <Footer />
-              </div>
-            }
-          />
-<Route
-            path="/millionbithomepage"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="millionbit" />
-                <Footer />
-              </div>
-            }
-          />
-<Route
-            path="/rachel"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="rachel" />
-                <Footer />
-              </div>
-            }
-          />
+            <Route
+              path="/admin"
+              element={
+                <div className="App">
+                  <Navbar />
+                  <AdminDashboard />
+                  <Footer />
+                </div>
+              }
+            />
+
+            {/* Dynamic routes generated from database */}
+            {routes.map(({ slug }) => (
+              <Route
+                key={slug}
+                path={`/${slug}`}
+                element={
+                  <div className="App">
+                    <Navbar />
+                    <ComplaintBox recipient={slug} />
+                    <Footer />
+                  </div>
+                }
+              />
+            ))}
 
 <Route
-            path="/crypticpoet"
-            element={
-              <div className="App">
-                   <Navbar/>
-                <ComplaintBox recipient="crypticpoet" />
-                <Footer />
-              </div>
-            }
-          />
+  path="*"
+  element={
+    <div className="App">
+      <Navbar />
+      <NotFound />
+      <Footer />
+    </div>
+  }
+/>
+          </Routes>
+        </BrowserRouter>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
 
-          <Route
-            path="/dashboard"
-            element={
-              <div className="App">
-                    <Navbar/>
-                <Dashboard />
-                <Footer />
-              </div>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
-    </QueryClientProvider>
-  </WagmiProvider>
-);
+// Create root and render
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);

@@ -1,101 +1,73 @@
-
 import { Link } from 'react-router-dom';
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from 'framer-motion';
 import RatingSystem from "../RatingSystem/RatingSystem";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
+import { createClient } from '@supabase/supabase-js';
 
 // Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 
+const supabase = createClient(
+  process.env.REACT_APP_SUPABASE_URL,
+  process.env.REACT_APP_SUPABASE_ANON_KEY
+);
 
 const Homepage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("Ecosystem projects");
+  const [complaintBoxes, setComplaintBoxes] = useState({
+    pinned: [],
+    "Ecosystem projects": [],
+    Communities: [],
+    Influencers: []
+  });
+  const [isLoading, setIsLoading] = useState(true);
 
-  const complaintBoxes = {
-    pinned: [
-      {
-        name: "Jesse",
-        title: "Manager of Base",
-        initials: "JE",
-        twitter: "jessepollak",
-      },
-      {
-        name: "Brian",
-        title: "Manager of Coinbase",
-        initials: "BR",
-        twitter: "brian_armstrong",
-      },
-      {
-        name: "TYBG",
-        title: "Based God",
-        initials: "TY",
-        twitter: "tybasegod",
-      },
-    ],
-    "Ecosystem projects": [
-      {
-        name: "Based Merch Store",
-        title: "Manager",
-        initials: "BM",
-        twitter: "basedmerchstore",
-      },
-      {
-        name: "Base Token Store",
-        title: "Mykcryptodev",
-        initials: "BT",
-        twitter: "mykcryptodev",
-      },
-      {
-        name: "PokPok",
-        title: "Nibel.eth",
-        initials: "PP",
-        twitter: "Nibel_eth",
-      },
-    ],
-    Communities: [
-      {
-        name: "TYBG",
-        title: "Based God",
-        initials: "TY",
-        twitter: "tybasegod",
-      },
-      {
-        name: "Jeetolax",
-        title: "Community",
-        initials: "JT",
-        twitter: "jeetolax",
-      },
-      {
-        name: "Jesse Christ",
-        title: "Community",
-        initials: "JC",
-        twitter: "jessechrist",
-      },
-      {
-        name: "MillionBitHomepage",
-        title: "Community",
-        initials: "MB",
-        twitter: "millionbithomepage",
-      },
-    ],
-    Influencers: [
-      {
-        name: "Rachel",
-        title: "Influencer",
-        initials: "RC",
-        twitter: "rachel",
-      },
-      {
-        name: "Crypticpoet",
-        title: "Influencer",
-        initials: "CP",
-        twitter: "crypticpoet",
-      },
-    ],
+  useEffect(() => {
+    fetchComplaintBoxes();
+  }, []);
+
+  const fetchComplaintBoxes = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('complaint_boxes')
+        .select('*');
+
+      if (error) {
+        console.error('Error fetching complaint boxes:', error);
+        return;
+      }
+
+      // Organize boxes by category and handle pinned items
+      const organized = data.reduce((acc, box) => {
+        // Add to pinned if is_pinned is true
+        if (box.is_pinned) {
+          acc.pinned.push(box);
+        }
+        
+        // Also add to their regular category
+        if (!acc[box.category]) {
+          acc[box.category] = [];
+        }
+        acc[box.category].push(box);
+        
+        return acc;
+      }, {
+        pinned: [],
+        "Ecosystem projects": [],
+        Communities: [],
+        Influencers: []
+      });
+
+      setComplaintBoxes(organized);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error:', error);
+      setIsLoading(false);
+    }
   };
 
   const filterBoxes = (boxes) => {
@@ -105,7 +77,7 @@ const Homepage = () => {
   };
 
   const renderComplaintCard = (box, avatarClass) => (
-   <Link to={`/${box.name.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/${box.name.toLowerCase()}`} style={{ textDecoration: 'none' }}>
       <div key={box.name} className={`c-complain_card`}>
         <div className={`c-avatar-${avatarClass}`}>
           <div className="avatar-initals">{box.initials}</div>
@@ -121,6 +93,8 @@ const Homepage = () => {
           <a
             href={`https://twitter.com/${box.twitter}`}
             className="c-complain_action w-inline-block"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src="images/twitter.svg"
@@ -148,12 +122,20 @@ const Homepage = () => {
         </div>
         <RatingSystem boxName={box.name} twitterHandle={box.twitter} />
       </div>
- </Link>
+    </Link>
   );
 
+  if (isLoading) {
+    return (
+      <div className="content">
+        <div className="loading">Loading...</div>
+      </div>
+    );
+  }
+
   return (
-  <motion.div
-     initial={{ opacity: 0 }}
+    <motion.div
+      initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
@@ -247,7 +229,7 @@ const Homepage = () => {
           </div>
         </section>
       </div>
- </motion.div>
+    </motion.div>
   );
 };
 
