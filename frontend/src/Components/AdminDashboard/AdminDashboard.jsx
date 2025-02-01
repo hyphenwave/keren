@@ -85,7 +85,7 @@ const AdminDashboard = () => {
             }
 
             // Generate slug from name
-            const slug = newBox.name.toLowerCase().replace(/\s+/g, '');
+            const slug = newBox.name.toLowerCase().replace(/[\s-]+/g, '');
 
             // Generate default background image path if not provided
             const background_image = newBox.background_image ||

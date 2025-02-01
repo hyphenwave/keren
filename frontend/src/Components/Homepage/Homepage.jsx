@@ -77,7 +77,7 @@ const Homepage = () => {
   };
 
   const renderComplaintCard = (box, avatarClass) => (
-    <Link to={`/${box.name.toLowerCase()}`} style={{ textDecoration: 'none' }}>
+    <Link to={`/${box.name.toLowerCase().replace(/[\s-]+/g, '')}`} style={{ textDecoration: 'none' }}>
       <div key={box.name} className={`c-complain_card`}>
         <div className={`c-avatar-${avatarClass}`}>
           <div className="avatar-initals">{box.initials}</div>
